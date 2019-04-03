@@ -113,8 +113,8 @@ class Mhorario extends CI_Model {
                             $HOR_FECHAINGRESO,
                             $HOR_HORA_INICIO,
                             $HOR_HORA_FIN,
-							'$HOR_DIA',
-                            '$HOR_RESPONSABLE', 
+							$HOR_DIA,
+                            $HOR_RESPONSABLE, 
                             0)";				
             $this->db->query($sql);
             //print_r($sql);
@@ -129,31 +129,31 @@ class Mhorario extends CI_Model {
 			//VARIABLES DE INGRESO
 			$HOR_SEC_PERSONA=$this->input->post('HOR_SEC_PERSONA');
             $HOR_SEC_MATRICULA=$this->input->post('HOR_SEC_MATRICULA');	
-            $HOR_HORA_INICIO=prepCampoAlmacenar($this->input->post('HOR_HORA_INICIO'));
-            //$HOR_HORA_INICIO="TO_DATE('".$HOR_HORA_INICIO."','DD/MM/YYYY HH24:MI:SS')";
-            $HOR_HORA_FIN=prepCampoAlmacenar($this->input->post('HOR_HORA_FIN'));	
-            //$HOR_HORA_FIN="TO_DATE('".$HOR_HORA_FIN."','DD/MM/YYYY HH24:MI:SS')";			
+            $HORA_INICIO=prepCampoAlmacenar($this->input->post('HOR_HORA_INICIO'));
+            $HOR_HORA_INICIO="TO_DATE('".$HORA_INICIO."','DD/MM/YYYY HH24:MI:SS')";
+            $HORA_FIN=prepCampoAlmacenar($this->input->post('HOR_HORA_FIN'));	
+            $HOR_HORA_FIN="TO_DATE('".$HORA_FIN."','DD/MM/YYYY HH24:MI:SS')";			
 			$HOR_DIA=prepCampoAlmacenar($this->input->post('HOR_DIA'));					
             
             
            
 
-            $HORA_INICIO=$this->input->post('HOR_HORA_INICIO');
-			$HORA_FIN=$this->input->post('HOR_HORA_FIN');	
+            //$HORA_INICIO=$this->input->post('HOR_HORA_INICIO');
+			//$HORA_FIN=$this->input->post('HOR_HORA_FIN');	
 			
-			if (!empty($HORA_INICIO) and !empty($HORA_FIN)){
+			/*if (!empty($HORA_INICIO) and !empty($HORA_FIN)){
 					$HOR_HORA_INICIO ="TO_DATE('$HORA_INICIO 00:00:00', 'dd/mm/yy HH24:MI:SS')";
 					$HOR_HORA_FIN ="TO_DATE('$HORA_FIN 23:59:59', 'dd/mm/yy HH24:MI:SS')";              
 				}else{
 					$HOR_HORA_INICIO =null;
 					$HOR_HORA_FIN = null;
-				}
+				}*/
 
 				$sql="UPDATE HORARIO SET
 							HOR_SEC_PERSONA=$HOR_SEC_PERSONA,
                             HOR_SEC_MATRICULA=$HOR_SEC_MATRICULA,
-							HOR_HORA_INICIO='$HOR_HORA_INICIO',
-                            HOR_HORA_FIN='$HOR_HORA_FIN',
+							HOR_HORA_INICIO=$HOR_HORA_INICIO,
+                            HOR_HORA_FIN=$HOR_HORA_FIN,
 							HOR_DIA='$HOR_DIA'
                  WHERE HOR_SECUENCIAL=$HOR_SECUENCIAL";
          $this->db->query($sql);
