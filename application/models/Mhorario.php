@@ -113,8 +113,8 @@ class Mhorario extends CI_Model {
                             $HOR_FECHAINGRESO,
                             $HOR_HORA_INICIO,
                             $HOR_HORA_FIN,
-							$HOR_DIA,
-                            $HOR_RESPONSABLE, 
+							'$HOR_DIA',
+                            '$HOR_RESPONSABLE', 
                             0)";				
             $this->db->query($sql);
             //print_r($sql);
