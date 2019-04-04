@@ -15,8 +15,8 @@ jQuery(document).ready(function(){
                     {name:'HOR_SEC_PERSONA',index:'HOR_SEC_PERSONA',align:"center", width:60},
                     {name:'HOR_SEC_MATRICULA',index:'HOR_SEC_MATRICULA',align:"center", width:60},
 					{name:'HOR_FECHAINGRESO',index:'HOR_FECHAINGRESO',align:"center",  width:80},
-					{name:'HOR_HORA_INICIO',index:'HOR_HORA_INICIO',align:"center",  width:80},
-                    {name:'HOR_HORA_FIN',index:'HOR_HORA_FIN',align:"center",  width:80},					
+					{name:'HOR_HORA_INICIO',index:'HOR_HORA_INICIO',align:"center",  width:150},
+                    {name:'HOR_HORA_FIN',index:'HOR_HORA_FIN',align:"center",  width:150},					
 					{name:'HOR_DIA',index:'HOR_DIA', width:100,align:"center"},
 					{name:'HOR_RESPONSABLE',index:'HOR_RESPONSABLE', width:100,align:"center"},
 					{name:'HOR_ESTADO',index:'HOR_ESTADO',searchable:false, width:40,align:"center", edittype:'select', formatter:'select', editoptions:{value:"0:<span class='ui-icon ui-icon-circle-check ui-icon-extra'>Activo</span>;1:<span class='ui-icon ui-icon-circle-close ui-icon-extra'>Pasivo</span>"}}

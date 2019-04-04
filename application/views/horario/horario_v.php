@@ -10,13 +10,13 @@
 							Hora Inicio(*)
 						</th>
 						<td>
-						<input type="text" style="width:100px;" name="HOR_HORA_INICIO" id="HOR_HORA_INICIO" value="<?php echo !empty($sol->HOR_HORA_INICIO) ? prepCampoMostrar($sol->HOR_HORA_INICIO) : null ;?>" /> 
+						<input type="text" style="width:150px;" name="HOR_HORA_INICIO" id="HOR_HORA_INICIO" value="<?php echo !empty($sol->HOR_HORA_INICIO) ? prepCampoMostrar($sol->HOR_HORA_INICIO) : null ;?>" /> 
 						</td>
 						<th>
 							Hora fin(*)
                         </th>
                         <td>
-						<input type="text" style="width:100px;" name="HOR_HORA_FIN" id="HOR_HORA_FIN" value="<?php echo !empty($sol->HOR_HORA_FIN) ? prepCampoMostrar($sol->HOR_HORA_FIN) : null ;?>" />  
+						<input type="text" style="width:150px;" name="HOR_HORA_FIN" id="HOR_HORA_FIN" value="<?php echo !empty($sol->HOR_HORA_FIN) ? prepCampoMostrar($sol->HOR_HORA_FIN) : null ;?>" />  
                         </td>
                     </tr>
                     <tr>

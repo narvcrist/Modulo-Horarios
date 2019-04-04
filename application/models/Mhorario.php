@@ -18,8 +18,8 @@ class Mhorario extends CI_Model {
 											"HOR_SEC_PERSONA",
 											"HOR_SEC_MATRICULA",
 											"HOR_FECHAINGRESO",
-											"HOR_HORA_INICIO",
-											"HOR_HORA_FIN",
+											"to_char(HOR_HORA_INICIO,'DD-MM-YYY HH24:MI:SS') HOR_HORA_INICIO",
+                                            "to_char(HOR_HORA_FIN,'DD-MM-YYY HH24:MI:SS') HOR_HORA_FIN",
 											"HOR_DIA",
 											"HOR_RESPONSABLE",
 											"HOR_ESTADO");
@@ -45,8 +45,8 @@ class Mhorario extends CI_Model {
                 HOR_SEC_PERSONA,
                 HOR_SEC_MATRICULA,
                 HOR_FECHAINGRESO,
-                HOR_HORA_INICIO,
-                HOR_HORA_FIN,
+                to_char(HOR_HORA_INICIO,'DD-MM-YYY HH24:MI:SS') HOR_HORA_INICIO,
+                to_char(HOR_HORA_FIN,'DD-MM-YYY HH24:MI:SS') HOR_HORA_FIN,
                 HOR_DIA,
                 HOR_RESPONSABLE,
                 HOR_ESTADO
@@ -79,19 +79,20 @@ class Mhorario extends CI_Model {
 			oci_free_statement($stmt);            
             $HOR_FECHAINGRESO="TO_DATE('".$nsol[0]."','MM/DD/YYYY HH24:MI:SS')";
             $HOR_RESPONSABLE=$this->session->userdata('US_CODIGO');
-            
+
+            $HOR_HORA_INICIO="TO_DATE('".$nsol[0]."','DD/MM/YYYY HH24:MI:SS')";
+            $HOR_HORA_FIN="TO_DATE('".$nsol[0]."','DD/MM/YYYY HH24:MI:SS')";
 			
 			//VARIABLES DE INGRESO
 			
 			$HOR_SEC_PERSONA=$this->input->post('HOR_SEC_PERSONA');
             $HOR_SEC_MATRICULA=prepCampoAlmacenar($this->input->post('HOR_SEC_MATRICULA'));
             $HORA_INICIO=prepCampoAlmacenar($this->input->post('HOR_HORA_INICIO'));
-            $HOR_HORA_INICIO="TO_DATE('".$HORA_INICIO."','DD/MM/YYYY HH24:MI:SS')";
+            
             $HORA_FIN=prepCampoAlmacenar($this->input->post('HOR_HORA_FIN'));
-            $HOR_HORA_FIN="TO_DATE('".$HORA_FIN."','DD/MM/YYYY HH24:MI:SS')";
+           
             $HOR_DIA=prepCampoAlmacenar($this->input->post('HOR_DIA'));	
           
-		
 
 			//VARIABLES DE RUTAS
 			//$HOR_SEC_MATRICULA=NULL;
@@ -134,21 +135,7 @@ class Mhorario extends CI_Model {
             $HORA_FIN=prepCampoAlmacenar($this->input->post('HOR_HORA_FIN'));	
             $HOR_HORA_FIN="TO_DATE('".$HORA_FIN."','DD/MM/YYYY HH24:MI:SS')";			
 			$HOR_DIA=prepCampoAlmacenar($this->input->post('HOR_DIA'));					
-            
-            
-           
-
-            //$HORA_INICIO=$this->input->post('HOR_HORA_INICIO');
-			//$HORA_FIN=$this->input->post('HOR_HORA_FIN');	
-			
-			/*if (!empty($HORA_INICIO) and !empty($HORA_FIN)){
-					$HOR_HORA_INICIO ="TO_DATE('$HORA_INICIO 00:00:00', 'dd/mm/yy HH24:MI:SS')";
-					$HOR_HORA_FIN ="TO_DATE('$HORA_FIN 23:59:59', 'dd/mm/yy HH24:MI:SS')";              
-				}else{
-					$HOR_HORA_INICIO =null;
-					$HOR_HORA_FIN = null;
-				}*/
-
+    
 				$sql="UPDATE HORARIO SET
 							HOR_SEC_PERSONA=$HOR_SEC_PERSONA,
                             HOR_SEC_MATRICULA=$HOR_SEC_MATRICULA,
@@ -160,7 +147,5 @@ class Mhorario extends CI_Model {
 		 //print_r($sql);
          echo json_encode(array("cod"=>1,"numero"=>$HOR_SECUENCIAL,"mensaje"=>"Horario: ".$HOR_SECUENCIAL.", editado con éxito"));            
     }
-    
-
 }
 ?>

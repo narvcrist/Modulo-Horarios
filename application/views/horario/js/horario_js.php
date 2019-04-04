@@ -35,6 +35,7 @@ var today = new Date();
 
 jQuery("#HOR_HORA_INICIO,#HOR_HORA_FIN").datetimepicker({
         dateFormat: 'dd-mm-yy',
+        timeFormat: 'hh:mm:ss'
   	//beforeShow: rangoFecha
     });
 
