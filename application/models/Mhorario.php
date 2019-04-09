@@ -76,9 +76,9 @@ class Mhorario extends CI_Model {
 			$nsol=oci_fetch_row($stmt);
 			oci_free_statement($stmt);            
             $HOR_FECHAINGRESO="TO_DATE('".$nsol[0]."','MM/DD/YYYY HH24:MI:SS')";
-            $HOR_RESPONSABLE=$this->session->userdata('US_CODIGO');
-            $HOR_HORA_INICIO="TO_DATE('".$nsol[0]."','DD/MM/YYYY HH24:MI:SS')";
-            $HOR_HORA_FIN="TO_DATE('".$nsol[0]."','DD/MM/YYYY HH24:MI:SS')";
+            $HOR_RESPONSABLE= $this->session->userdata('US_CODIGO');
+            $HOR_HORA_INICIO= "TO_DATE('".$nsol[0]."','DD/MM/YYYY HH24:MI:SS')";
+            $HOR_HORA_FIN= "TO_DATE('".$nsol[0]."','DD/MM/YYYY HH24:MI:SS')";
 		
 			//VARIABLES DE INGRESO
 			
