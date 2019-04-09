@@ -32,7 +32,7 @@
 						<td>
                             <input type="text" maxlength="99" style="width:100px;" name="HOR_SEC_PERSONA" id="HOR_SEC_PERSONA" value="<?php echo !empty($sol->HOR_SEC_PERSONA) ? prepCampoMostrar($sol->HOR_SEC_PERSONA) : null ; ?>"  />
 						</td>
-						<th>
+						<th>   
 							Matricula
 						</th>
                         <td>
@@ -45,8 +45,7 @@
                                 <button title="Verifique la información antes de guardar." id="co_grabar" type="submit" ><img src="./imagenes/guardar.png" width="17" height="17"/>Grabar Horario</button>
                              </td>
                     
-						<?php endif; ?>
-						
+						<?php endif; ?>	
                 </table>
             </div>
             <input type="hidden"  name="HOR_SECUENCIAL" id="HOR_SECUENCIAL" value="<?php echo !empty($sol->HOR_SECUENCIAL) ? prepCampoMostrar($sol->HOR_SECUENCIAL) : 0 ; ?>"  />
