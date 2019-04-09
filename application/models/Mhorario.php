@@ -5,7 +5,7 @@ class Mhorario extends CI_Model {
    function getdatosItems(){
         $datos = new stdClass();
         $consulta=$_POST['_search'];
-        $numero=  $this->input->post('numero');
+        $numero= $this->input->post('numero');
         $datos->econdicion ='HOR_ESTADO<>1';
 		$user=$this->session->userdata('US_CODIGO');
                 
@@ -37,7 +37,6 @@ class Mhorario extends CI_Model {
               $datos->debug = false;	
            return $this->jqtabla->finalizarTabla($this->jqtabla->getTabla($datos), $datos);
    }
-   
    //Datos que seran enviados para la edicion o visualizacion de cada registro seleccionado
    function dataHorario($numero){
        $sql="select
@@ -67,8 +66,7 @@ class Mhorario extends CI_Model {
                          $sol=$this->db->query($sql)->row();
 						}
           return $sol;
-		}
-    	
+		}	
 	//funcion para crear un nuevo reporte o cabecera
     function agrHorario(){
 			$sql="select to_char(SYSDATE,'MM/DD/YYYY HH24:MI:SS') FECHA from dual";		
@@ -79,21 +77,17 @@ class Mhorario extends CI_Model {
 			oci_free_statement($stmt);            
             $HOR_FECHAINGRESO="TO_DATE('".$nsol[0]."','MM/DD/YYYY HH24:MI:SS')";
             $HOR_RESPONSABLE=$this->session->userdata('US_CODIGO');
-
             $HOR_HORA_INICIO="TO_DATE('".$nsol[0]."','DD/MM/YYYY HH24:MI:SS')";
             $HOR_HORA_FIN="TO_DATE('".$nsol[0]."','DD/MM/YYYY HH24:MI:SS')";
-			
+		
 			//VARIABLES DE INGRESO
 			
 			$HOR_SEC_PERSONA=$this->input->post('HOR_SEC_PERSONA');
             $HOR_SEC_MATRICULA=prepCampoAlmacenar($this->input->post('HOR_SEC_MATRICULA'));
-            $HORA_INICIO=prepCampoAlmacenar($this->input->post('HOR_HORA_INICIO'));
-            
+            $HORA_INICIO=prepCampoAlmacenar($this->input->post('HOR_HORA_INICIO')); 
             $HORA_FIN=prepCampoAlmacenar($this->input->post('HOR_HORA_FIN'));
-           
             $HOR_DIA=prepCampoAlmacenar($this->input->post('HOR_DIA'));	
-          
-
+        
 			//VARIABLES DE RUTAS
 			//$HOR_SEC_MATRICULA=NULL;
 			//$HOR_HORA_INICIO=NULL;
@@ -122,12 +116,12 @@ class Mhorario extends CI_Model {
 			$HOR_SECUENCIAL=$this->db->query("select max(HOR_SECUENCIAL) SECUENCIAL from HORARIO")->row()->SECUENCIAL;
 			echo json_encode(array("cod"=>$HOR_SECUENCIAL,"numero"=>$HOR_SECUENCIAL,"mensaje"=>"Horario: ".$HOR_SECUENCIAL.", insertado con éxito"));    
     }
-    
 	//funcion para editar un registro selccionado
     function editHorario(){
 			$HOR_SECUENCIAL=$this->input->post('HOR_SECUENCIAL');
 			
-			//VARIABLES DE INGRESO
+            //VARIABLES DE INGRESO
+            
 			$HOR_SEC_PERSONA=$this->input->post('HOR_SEC_PERSONA');
             $HOR_SEC_MATRICULA=$this->input->post('HOR_SEC_MATRICULA');	
             $HORA_INICIO=prepCampoAlmacenar($this->input->post('HOR_HORA_INICIO'));
@@ -142,6 +136,7 @@ class Mhorario extends CI_Model {
 							HOR_HORA_INICIO=$HOR_HORA_INICIO,
                             HOR_HORA_FIN=$HOR_HORA_FIN,
 							HOR_DIA='$HOR_DIA'
+                            
                  WHERE HOR_SECUENCIAL=$HOR_SECUENCIAL";
          $this->db->query($sql);
 		 //print_r($sql);
