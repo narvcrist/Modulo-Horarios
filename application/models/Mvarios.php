@@ -108,7 +108,7 @@ class Mvarios extends CI_Model {
 		}
 	}
 	
-	//combo para obtener sectpres
+	//combo para obtener sectOres
 	function cmb_sector($LOC_SECUENCIAL = null, $LOC_CIUDAD = null,$attr = null){
         if (($LOC_SECUENCIAL == null) and ($LOC_CIUDAD == null)) {
             $output[null] = "Sector...";
@@ -171,7 +171,25 @@ function VerificarCorreo($direccion){
 				}else{
 					return 1;
 				}
-		}	
+		}
+//combo para obtener Personas
+function cmb_persona($PER_SECUENCIAL = null, $attr = null){		
+	$sql = "select PER_SECUENCIAL,PER_APELLIDOS,PER_NOMBRES,PER_CEDULA 
+			from PERSONA 
+			where PER_ESTADO=0 
+			order by PER_APELLIDOS ASC";
+	$results = $this->db->query($sql)->result_array();
+	$output = array();
+	if (count($results) > 0) {
+		$output[null] = "Persona...";
+		foreach ($results as $result) {
+			$output[$result['PER_SECUENCIAL']] = utf8_encode($result['PER_APELLIDOS'])." ".utf8_encode($result['PER_NOMBRES'])." -- ".utf8_encode($result['PER_CEDULA']);
+		}
+		return form_dropdown('persona', $output, $PER_SECUENCIAL, $attr);
+   } else {
+		return alerta("No Posee Personas. <input type='hidden' name='persona' value='' />");
+	}
+}
 	
 }
 ?>

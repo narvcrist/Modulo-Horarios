@@ -30,7 +30,7 @@
 							Persona
 						</th>
 						<td>
-                            <input type="text" maxlength="99" style="width:100px;" name="HOR_SEC_PERSONA" id="HOR_SEC_PERSONA" value="<?php echo !empty($sol->HOR_SEC_PERSONA) ? prepCampoMostrar($sol->HOR_SEC_PERSONA) : null ; ?>"  />
+                           <?php echo $combo_persona; ?>
 						</td>
 						<th>   
 							Matricula

@@ -48,10 +48,12 @@ class Horario extends CI_Controller{
 	//funcion para dar los valores a la cabecera tanto en nuevo, como al momento de editar
 	function datos($sol,$accion){
         if ($accion=='n') {
-            
-            $datos=null;
-		} else {  
-            $datos=null;
+            $datos['combo_persona']=$this->mvarios->cmb_persona(null," style='width:100px;' id='HOR_SEC_PERSONA'");
+            //$datos=null;
+		} else {
+            $HOR_SEC_PERSONA=$sol->HOR_SEC_PERSONA;
+            $datos['combo_persona']=$this->mvarios->cmb_persona($HOR_SEC_PERSONA," style='width:100px;' id='HOR_SEC_PERSONA'");  
+            //$datos=null;
         }
         return($datos);
      }
