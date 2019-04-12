@@ -97,33 +97,34 @@ class Mhorario extends CI_Model {
             $HORA_FIN=prepCampoAlmacenar($this->input->post('HOR_HORA_FIN'));
             $HOR_DIA=prepCampoAlmacenar($this->input->post('HOR_DIA'));	
         
-			//VARIABLES DE RUTAS
-			//$HOR_SEC_MATRICULA=NULL;
-			//$HOR_HORA_INICIO=NULL;
-			//$HOR_HORA_FIN=NULL;
-			//$HOR_DIA=NULL;
-			
-				$sql="INSERT INTO HORARIO (
-							HOR_SEC_PERSONA,
-                            HOR_SEC_MATRICULA,
-                            HOR_FECHAINGRESO,
-                            HOR_HORA_INICIO,
-                            HOR_HORA_FIN,
-                            HOR_DIA,
-                            HOR_RESPONSABLE,
-                            HOR_ESTADO) VALUES (
-                            $HOR_SEC_PERSONA,
-							$HOR_SEC_MATRICULA,
-                            $HOR_FECHAINGRESO,
-                            $HOR_HORA_INICIO,
-                            $HOR_HORA_FIN,
-							'$HOR_DIA',
-                            '$HOR_RESPONSABLE', 
-                            0)";				
-            $this->db->query($sql);
-            //print_r($sql);
-			$HOR_SECUENCIAL=$this->db->query("select max(HOR_SECUENCIAL) SECUENCIAL from HORARIO")->row()->SECUENCIAL;
-			echo json_encode(array("cod"=>$HOR_SECUENCIAL,"numero"=>$HOR_SECUENCIAL,"mensaje"=>"Horario: ".$HOR_SECUENCIAL.", insertado con éxito"));    
+			$sqlHORARIOVALIDA="select count(*) NUM_HORARIO from HORARIO WHERE HOR_SEC_PERSONA='{$HOR_SEC_PERSONA }' and HOR_ESTADO=0";
+			$NUM_HORARIO =$this->db->query($sqlHORARIOVALIDA)->row()->NUM_HORARIO ;
+			if($NUM_HORARIO ==0){
+                $sql="INSERT INTO HORARIO (
+                    HOR_SEC_PERSONA,
+                    HOR_SEC_MATRICULA,
+                    HOR_FECHAINGRESO,
+                    HOR_HORA_INICIO,
+                    HOR_HORA_FIN,
+                    HOR_DIA,
+                    HOR_RESPONSABLE,
+                    HOR_ESTADO) VALUES (
+                    $HOR_SEC_PERSONA,
+                    $HOR_SEC_MATRICULA,
+                    $HOR_FECHAINGRESO,
+                    $HOR_HORA_INICIO,
+                    $HOR_HORA_FIN,
+                    '$HOR_DIA',
+                    '$HOR_RESPONSABLE', 
+                    0)";
+				$this->db->query($sql);
+				//print_r($sql);
+				$HOR_SECUENCIAL=$this->db->query("select max(HOR_SECUENCIAL) SECUENCIAL from HORARIO")->row()->SECUENCIAL;
+				echo json_encode(array("cod"=>$HOR_SECUENCIAL,"numero"=>$HOR_SECUENCIAL,"mensaje"=>"Junta: ".$HOR_SECUENCIAL.", insertado con éxito"));    
+			}else{
+				echo json_encode(array("cod"=>1,"numero"=>1,"mensaje"=>"!!!...El Horario Ya Existe...!!!"));
+			}
+			    
     }
 	//funcion para editar un registro selccionado
     function editHorario(){
