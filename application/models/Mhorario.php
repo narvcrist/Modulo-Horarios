@@ -17,7 +17,15 @@ class Mhorario extends CI_Model {
 											"HOR_SECUENCIAL",
                                             "(SELECT CONCAT(CONCAT(PER_APELLIDOS,' '), PER_NOMBRES) FROM PERSONA WHERE PER_SECUENCIAL = HOR_SEC_PERSONA)
                                             HOR_SEC_PERSONA",
-											"HOR_SEC_MATRICULA",
+											"(SELECT CONCAT(CONCAT(CONCAT(CONCAT((CASE (SELECT COUNT(ASP_NOMBRE) FROM ASPIRANTE WHERE ASP_SECUENCIAL=MATR_SEC_ASPIRANTE)
+                                            WHEN 0 THEN 'SIN ASIGNACION'
+                                            ELSE
+                                            (SELECT ASP_NOMBRE FROM ASPIRANTE WHERE ASP_SECUENCIAL=MATR_SEC_ASPIRANTE)
+                                            END),'-'),
+                                            (SELECT MAT_NOMBRE FROM MATERIA WHERE MAT_SECUENCIAL=MATR_SEC_MATERIA)),'-'),
+                                            (SELECT CONCAT(CONCAT(CONCAT(JOR_NOMBRE,'('),JOR_PARALELO),')') JOR_DESCRIPCION FROM JORNADA 
+                                            WHERE JOR_SECUENCIAL=MATR_SEC_JORNADA)) ASP_MAT_JOR
+                                            FROM MATRICULA WHERE MATR_SECUENCIAL=HOR_SEC_MATRICULA) HOR_SEC_MATRICULA",
 											"HOR_FECHAINGRESO",
 											"to_char(HOR_HORA_INICIO,'DD-MM-YYY HH24:MI:SS') HOR_HORA_INICIO",
                                             "to_char(HOR_HORA_FIN,'DD-MM-YYY HH24:MI:SS') HOR_HORA_FIN",
@@ -84,7 +92,7 @@ class Mhorario extends CI_Model {
 			//VARIABLES DE INGRESO
 			
 			$HOR_SEC_PERSONA=$this->input->post('persona');
-            $HOR_SEC_MATRICULA=prepCampoAlmacenar($this->input->post('HOR_SEC_MATRICULA'));
+            $HOR_SEC_MATRICULA=prepCampoAlmacenar($this->input->post('matricula'));
             $HORA_INICIO=prepCampoAlmacenar($this->input->post('HOR_HORA_INICIO')); 
             $HORA_FIN=prepCampoAlmacenar($this->input->post('HOR_HORA_FIN'));
             $HOR_DIA=prepCampoAlmacenar($this->input->post('HOR_DIA'));	
@@ -124,7 +132,7 @@ class Mhorario extends CI_Model {
             //VARIABLES DE INGRESO
             
 			$HOR_SEC_PERSONA=$this->input->post('persona');
-            $HOR_SEC_MATRICULA=$this->input->post('HOR_SEC_MATRICULA');	
+            $HOR_SEC_MATRICULA=$this->input->post('matricula');	
             $HORA_INICIO=prepCampoAlmacenar($this->input->post('HOR_HORA_INICIO'));
             $HOR_HORA_INICIO="TO_DATE('".$HORA_INICIO."','DD/MM/YYYY HH24:MI:SS')";
             $HORA_FIN=prepCampoAlmacenar($this->input->post('HOR_HORA_FIN'));	

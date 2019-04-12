@@ -17,7 +17,7 @@
 							Persona(*)
 						</th>
 						<td>
-                            <input type="number" maxlength="100" style="width:150px;" name="APO_SEC_PERSONA" id="APO_SEC_PERSONA" value="<?php echo !empty($sol->APO_SEC_PERSONA) ? prepCampoMostrar($sol->APO_SEC_PERSONA) : 1 ; ?>"  />
+							<?php echo $combo_persona; ?>
 						</td>
 						
 						<th>
@@ -59,7 +59,7 @@
 							Fecha Limite
 						</th>
                         <td>
-						<input type="text" style="width:80px;" name="APO_FECHALIMITE" id="APO_FECHALIMITE" value="<?php echo !empty($sol->APO_FECHALIMITE) ? prepCampoMostrar($sol->APO_FECHALIMITE) : null ; ?>" />
+						<input type="text" style="width:150px;" name="APO_FECHALIMITE" id="APO_FECHALIMITE" value="<?php echo !empty($sol->APO_FECHALIMITE) ? prepCampoMostrar($sol->APO_FECHALIMITE) : null ; ?>" />
 						</td>
 					</tr>
 							

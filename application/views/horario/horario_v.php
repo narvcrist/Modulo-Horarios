@@ -31,13 +31,15 @@
 						</th>
 						<td>
                            <?php echo $combo_persona; ?>
-						</td>
+						</td>			
+					</tr>
+					<tr>
 						<th>   
 							Matricula
 						</th>
-                        <td>
-                            <input type="number" min="0" max="999" style="width:100px;" name="HOR_SEC_MATRICULA" id="HOR_SEC_MATRICULA" value="<?php echo !empty($sol->HOR_SEC_MATRICULA) ? prepCampoMostrar($sol->HOR_SEC_MATRICULA) : 0 ;?>" />
-						</td>				
+                        <td colspan=6>
+							<?php echo $combo_matricula; ?>	
+						</td>
 					</tr>
 						<?php if($accion=='n'|$accion=='e') : ?>                    
                             

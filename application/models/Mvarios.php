@@ -167,7 +167,7 @@ class Mvarios extends CI_Model {
 function VerificarCorreo($direccion){
 			$Sintaxis='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#';
 				if(preg_match($Sintaxis,$direccion)){
-					return 0;
+					return 0; 
 				}else{
 					return 1;
 				}
@@ -188,6 +188,30 @@ function cmb_persona($PER_SECUENCIAL = null, $attr = null){
 		return form_dropdown('persona', $output, $PER_SECUENCIAL, $attr);
    } else {
 		return alerta("No Posee Personas. <input type='hidden' name='persona' value='' />");
+	}
+}
+
+//combo para obtener Matriculas
+function cmb_matricula($MATR_SECUENCIAL = null, $attr = null){
+		
+	$sql = "SELECT MATR_SECUENCIAL,(CASE (SELECT COUNT(ASP_NOMBRE) FROM ASPIRANTE WHERE ASP_SECUENCIAL=MATR_SEC_ASPIRANTE)
+					WHEN 0 THEN 'SIN ASIGNACION'
+					ELSE
+			(SELECT ASP_NOMBRE FROM ASPIRANTE WHERE ASP_SECUENCIAL=MATR_SEC_ASPIRANTE)
+					END) ASPIRANTE,
+			(SELECT MAT_NOMBRE FROM MATERIA WHERE MAT_SECUENCIAL=MATR_SEC_MATERIA) MATERIA,
+			(SELECT CONCAT(CONCAT(CONCAT(JOR_NOMBRE,'('),JOR_PARALELO),')') JOR_DESCRIPCION FROM JORNADA WHERE JOR_SECUENCIAL=MATR_SEC_JORNADA) JORNADA
+			FROM MATRICULA";
+	$results = $this->db->query($sql)->result_array();
+	$output = array();
+	if (count($results) > 0) {
+		$output[null] = "Matricula...";
+		foreach ($results as $result) {
+          	$output[$result['MATR_SECUENCIAL']] = utf8_encode($result['ASPIRANTE'])."  ".utf8_encode($result['MATERIA'])." -- ".utf8_encode($result['JORNADA']);
+		}
+		return form_dropdown('matricula', $output, $MATR_SECUENCIAL, $attr);
+   } else {
+		return alerta("No Posee Matricula. <input type='hidden' name='matricula' value='' />");
 	}
 }
 	

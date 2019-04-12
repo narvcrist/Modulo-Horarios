@@ -33,8 +33,9 @@ var today = new Date();
     }
 
 
-jQuery("#APO_FECHALIMITE").datepicker({
-        dateFormat: 'dd-mm-yy'
+jQuery("#APO_FECHALIMITE").datetimepicker({
+        dateFormat: 'dd-mm-yy',
+        timeFormat: 'hh:mm:ss'
   	//beforeShow: rangoFecha
     });
 
@@ -118,6 +119,7 @@ $("#faporte").validate({
 			"APO_NOTA4":{required:true},
 			"APO_SEC_PERSONA":{required:true},
 			"APO_SEC_MATRICULA":{required:true},
+            "APO_FECHALIMITE":{required:true},
 			"PER_EMAIL":{required:true},			
             }
      });     

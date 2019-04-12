@@ -49,10 +49,13 @@ class Horario extends CI_Controller{
 	function datos($sol,$accion){
         if ($accion=='n') {
             $datos['combo_persona']=$this->mvarios->cmb_persona(null," style='width:100px;' id='HOR_SEC_PERSONA'");
+            $datos['combo_matricula']=$this->mvarios->cmb_matricula(null,"style='width:500px;' id='HOR_SEC_MATRICULA'");
             //$datos=null;
 		} else {
             $HOR_SEC_PERSONA=$sol->HOR_SEC_PERSONA;
             $datos['combo_persona']=$this->mvarios->cmb_persona($HOR_SEC_PERSONA," style='width:100px;' id='HOR_SEC_PERSONA'");  
+            $HOR_SEC_MATRICULA=$sol->HOR_SEC_MATRICULA;
+            $datos['combo_matricula']=$this->mvarios->cmb_matricula($HOR_SEC_MATRICULA,"style='width:500px;' id='HOR_SEC_MATRICULA'");
             //$datos=null;
         }
         return($datos);

@@ -15,13 +15,14 @@ class Maporte extends CI_Model {
 										"APO_SECUENCIAL",
 										"APO_FECHAINGRESO",
 										"APO_SEC_MATRICULA",
-										"APO_SEC_PERSONA",
+										"(SELECT CONCAT(CONCAT(PER_NOMBRES,' '),PER_APELLIDOS) FROM PERSONA WHERE PER_SECUENCIAL=APO_SEC_PERSONA)
+										 APO_SEC_PERSONA",
 										"APO_SEC_TIPOCALIFICACION",
 										"APO_NOTA1",
 										"APO_NOTA2",
 										"APO_NOTA3",
 										"APO_NOTA4",
-										"APO_FECHALIMITE",
+										"to_char(APO_FECHALIMITE, 'DD-MM-YYY HH24:MI:SS')APO_FECHALIMITE",
 										"APO_RESPONSABLE_CREA",
 										"APO_RESPONSABLE_EDITA",
 										"APO_ESTADO"		   
@@ -57,7 +58,7 @@ class Maporte extends CI_Model {
 							APO_NOTA2,
 							APO_NOTA3,
 							APO_NOTA4,
-							APO_FECHALIMITE,
+							to_char(APO_FECHALIMITE, 'DD-MM-YYY HH24:MI:SS')APO_FECHALIMITE,
 							APO_RESPONSABLE_CREA,
 							APO_RESPONSABLE_EDITA,
 							APO_ESTADO
@@ -94,7 +95,7 @@ class Maporte extends CI_Model {
             $APO_FECHAINGRESO="TO_DATE('".$nsol[0]."','MM/DD/YYYY HH24:MI:SS')";
 			//VARIABLES DE INGRESO			
 			$APO_SEC_MATRICULA=$this->input->post('APO_SEC_MATRICULA');			
-			$APO_SEC_PERSONA=$this->input->post('APO_SEC_PERSONA');			
+			$APO_SEC_PERSONA=$this->input->post('persona');			
 			$APO_SEC_TIPOCALIFICACION=$this->input->post('APO_SEC_TIPOCALIFICACION');			
 			$APO_NOTA1=$this->input->post('APO_NOTA1');			
 			$APO_NOTA2=$this->input->post('APO_NOTA2');			
@@ -139,14 +140,14 @@ class Maporte extends CI_Model {
             $this->db->query($sql);
             //print_r($sql);
 			$APO_SECUENCIAL=$this->db->query("select max(APO_SECUENCIAL) SECUENCIAL from APORTES")->row()->SECUENCIAL;
-			echo json_encode(array("cod"=>$APO_SECUENCIAL,"numero"=>$APO_SECUENCIAL,"mensaje"=>"Persona: ".$APO_SECUENCIAL.", insertado con éxito"));    
+			echo json_encode(array("cod"=>$APO_SECUENCIAL,"numero"=>$APO_SECUENCIAL,"mensaje"=>"Aportes: ".$APO_SECUENCIAL.", insertado con éxito"));    
     }
 	//funcion para editar un registro selccionado
     function editAporte(){
 			$APO_SECUENCIAL=$this->input->post('APO_SECUENCIAL');
 			//VARIABLES DE INGRESO
 			$APO_SEC_MATRICULA=$this->input->post('APO_SEC_MATRICULA');			
-			$APO_SEC_PERSONA=$this->input->post('APO_SEC_PERSONA');			
+			$APO_SEC_PERSONA=$this->input->post('persona');			
 			$APO_SEC_TIPOCALIFICACION=$this->input->post('APO_SEC_TIPOCALIFICACION');			
 			$APO_NOTA1=$this->input->post('APO_NOTA1');			
 			$APO_NOTA2=$this->input->post('APO_NOTA2');			
@@ -175,6 +176,5 @@ class Maporte extends CI_Model {
 		 //print_r($sql);
          echo json_encode(array("cod"=>1,"numero"=>$APO_SECUENCIAL,"mensaje"=>"Aporte: ".$APO_SECUENCIAL.", editado con éxito"));            
 	}
-	
 }
 ?>
