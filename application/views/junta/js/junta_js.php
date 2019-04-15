@@ -13,31 +13,6 @@
   }
   </style>
 <script type="text/javascript">
-//Fecha Actual
-var today = new Date();
-		var dd = today.getDate();
-		var mm = today.getMonth()+1;
-		var yyyy = today.getFullYear();
-			if(dd<10){
-				dd='0'+dd
-			} 
-			if(mm<10){
-				mm='0'+mm
-			}
-		var today = dd+'-'+mm+'-'+yyyy; //variable fecha actual
-		
- function rangoFecha(input){
-    return {
-        maxDate: today
-		}
-    }
-
-
-jQuery("#APO_FECHALIMITE").datetimepicker({
-        dateFormat: 'dd-mm-yy',
-        timeFormat: 'hh:mm:ss'
-  	//beforeShow: rangoFecha
-    });
 
 jQuery(document).ready(function(){
     $("table.formDialog tr th,table.formDialog caption").addClass("ui-widget ui-widget-header");
@@ -45,7 +20,7 @@ jQuery(document).ready(function(){
     $("table.formDialog tr td.noClass").removeClass("ui-widget ui-widget-content");
     
    var accion='<?php echo $accion;?>';
-   var numero='<?php echo !empty($sol->APO_SECUENCIAL) ? prepCampoMostrar($sol->APO_SECUENCIAL) : null ; ?>';
+   var numero='<?php echo !empty($sol->JUN_SECUENCIAL) ? prepCampoMostrar($sol->JUN_SECUENCIAL) : null ; ?>';
    
    //Acciones que se manejan en base a los eventos
    if (accion=='n'){ //nueva
@@ -66,20 +41,41 @@ jQuery(document).ready(function(){
         }
     });
 	
-	//Funcion para validar correo		
-	function validarEmail( email ) {
-    expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    if ( !expr.test(email) ){
-		$('#PER_EMAIL').val('');
-        alert("!!!...Error: La dirección de correo: " + email + ", es incorrecta...!!!");
-	}
-		}
+	
+
+    //FUNCIONES PARA LUGAR JUNTA
+	//Funcion para combo de Pais en carga		 
+	$('#LOC_PAIS_JUNTA').change(function() {
+                    $("#LOC_PROVINCIA_JUNTA").val("");
+                    $("#LOC_CIUDAD_JUNTA").val("");
+					datos_provincia_junta($('#LOC_PAIS_JUNTA').val());
+            });
+			
+	//Funcion para combo de Provincia en carga		
+	$('#LOC_PROVINCIA_JUNTA').change(function() {
+				$("#LOC_CIUDAD_JUNTA").val("");
+			    datos_ciudad_junta($('#LOC_PROVINCIA_JUNTA').val());
+            });			
+			
 		
-	$("#PER_EMAIL").change(function() {
-        validarEmail($('#PER_EMAIL').val());        
-    })
+	//Funcion para tomar datos de provincia a partir del pais
+	function datos_provincia_junta(pais){
+        $.post("varios/get_provincia",{pais:pais},
+            function(data){
+               $("#LOC_PROVINCIA_JUNTA").empty().html(data);
+         },"html");                 
+    }
+	
+	//Funcion para tomar datos de ciudad a partir de provincia
+	function datos_ciudad_junta(ciudad){
+        $.post("varios/get_ciudad",{ciudad:ciudad},
+            function(data){
+               $("#LOC_CIUDAD_JUNTA").empty().html(data);
+         },"html");                 
+    }
+
 //Manejo de los campos tanto para un nuevo como para editar	
-$("#faporte").validate({
+$("#fjunta").validate({
        errorClass: "ui-state-error",
        validClass: "ui-state-highlight",
        wrapper: "span class='ui-extra-validation ui-widget ui-container'",
@@ -87,13 +83,13 @@ $("#faporte").validate({
        submitHandler: function(form){
            $.ajax({
                type: "POST",
-               url:  "aporte/admaporte/"+accion,
-               data: $("#faporte").serialize(),
+               url:  "junta/admJunta/"+accion,
+               data: $("#fjunta").serialize(),
                dataType:"json",
                success: function(r){
                        if (r.cod>0) {
-                           $("#faporte").jConfirmacion({
-                                        titulo:"aporte: "+r.numero,
+                           $("#fjunta").jConfirmacion({
+                                        titulo:"Junta: "+r.numero,
                                         mensaje: r.mensaje,
                                         tipoMensaje:"highlight",
                                         ancho: 250,
@@ -101,7 +97,7 @@ $("#faporte").validate({
                             });
                            $(":input","#cabecera").attr("disabled", true);
                            if (accion=='n'){
-                                $("#APO_SECUENCIAL").val(r.numero);
+                                $("#JUN_SECUENCIAL").val(r.numero);
 								}
                                 $("#co_grabar").hide();
                        } else {
@@ -111,18 +107,9 @@ $("#faporte").validate({
            })// ajax
        },  //submit handler
        rules:{
-            genero:{required:true},
-            civil:{required:true},
-			"APO_NOTA1":{required:true},
-			"APO_NOTA2":{required:true},
-			"APO_NOTA3":{required:true},
-			"APO_NOTA4":{required:true},
-			"APO_SEC_PERSONA":{required:true},
-			"APO_SEC_MATRICULA":{required:true},
-            "APO_FECHALIMITE":{required:true},
-            "APO_TIPOCALIFICACION":{required:true},
-			"PER_EMAIL":{required:true},			
-            }
+            cudad_junta:{required:true},
+			"JUN_NOMBRE":{required:true}
+             }
      });     
 });
 </script>

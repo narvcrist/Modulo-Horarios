@@ -6,13 +6,14 @@
             <table width="99%" id="taporte" class="formDialog">    
 			
 					<tr>
-					    <th>
+						<th>
 							Matricula
 						</th>
-                        <td>
-                            <input type="number" min="0" max="999" maxlength="15" style="width:100px;" name="APO_SEC_MATRICULA" id="APO_SEC_MATRICULA" value="<?php echo !empty($sol->APO_SEC_MATRICULA) ? prepCampoMostrar($sol->APO_SEC_MATRICULA) : 1 ; ?>"  />
+                        <td colspan=6>
+							<?php echo $combo_matricula; ?>	
 						</td>
-					   
+					</tr>
+					<tr>										
 						<th>
 							Persona(*)
 						</th>
@@ -24,7 +25,7 @@
 							Tipo de Calificacion(*)
                         </th>
                         <td>
-                            <input type="text" maxlength="100" style="width:150px;" name="APO_SEC_TIPOCALIFICACION" id="APO_SEC_TIPOCALIFICACION" value="<?php echo !empty($sol->APO_SEC_TIPOCALIFICACION) ? prepCampoMostrar($sol->APO_SEC_TIPOCALIFICACION) : 1 ; ?>"  />
+						<?php echo $combo_tipocalificacion; ?>
 						</td>
                     </tr>
                     <tr>

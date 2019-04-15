@@ -46,12 +46,18 @@ class Aporte extends CI_Controller{
 	//funcion para dar los valores a la cabecera tanto en nuevo, como al momento de editar
 	function datos($sol,$accion){
         if ($accion=='n') {
-            	$datos['combo_persona']=$this->mvarios->cmb_persona(null,"style='width:100px;' id='APO_SEC_PERSONA'");			
-            //$datos = null;
+            	$datos['combo_persona']=$this->mvarios->cmb_persona(null,"style='width:130px;' id='APO_SEC_PERSONA'");			
+            	$datos['combo_matricula']=$this->mvarios->cmb_matricula(null,"style='width:500px;' id='APO_SEC_MATRICULA'");			
+            	$datos['combo_tipocalificacion']=$this->mvarios->cmb_tipocalificacion(null,"style='width:100px;' id='APO_SEC_TIPOCALIFICACION'");			                
+                //$datos = null;
             
         } else {
             $APO_SEC_PERSONA=$sol->APO_SEC_PERSONA;
-            $datos['combo_persona']=$this->mvarios->cmb_persona($APO_SEC_PERSONA,"style='width:100px;' id='APO_SEC_PERSONA'");			
+            $datos['combo_persona']=$this->mvarios->cmb_persona($APO_SEC_PERSONA,"style='width:130px;' id='APO_SEC_PERSONA'");			
+            $APO_SEC_MATRICULA=$sol->APO_SEC_MATRICULA;
+            $datos['combo_matricula']=$this->mvarios->cmb_matricula($APO_SEC_MATRICULA,"style='width:500px;' id='APO_SEC_MATRICULA'");
+            $APO_SEC_TIPOCALIFICACION=$sol->APO_SEC_TIPOCALIFICACION;
+            $datos['combo_tipocalificacion']=$this->mvarios->cmb_tipocalificacion($APO_SEC_TIPOCALIFICACION,"style='width:100px;' id='APO_SEC_TIPOCALIFICACION'");			
             //$datos = null;    
         }
         return($datos);

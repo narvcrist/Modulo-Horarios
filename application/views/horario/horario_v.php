@@ -34,7 +34,7 @@
 						</td>			
 					</tr>
 					<tr>
-						<th>   
+					<th>   
 							Matricula
 						</th>
                         <td colspan=6>
