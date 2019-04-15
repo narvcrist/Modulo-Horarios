@@ -86,8 +86,8 @@ class Mhorario extends CI_Model {
 			oci_free_statement($stmt);            
             $HOR_FECHAINGRESO="TO_DATE('".$nsol[0]."','MM/DD/YYYY HH24:MI:SS')";
             $HOR_RESPONSABLE= $this->session->userdata('US_CODIGO');
-            $HOR_HORA_INICIO= "TO_DATE('".$nsol[0]."','DD/MM/YYYY HH24:MI:SS')";
-            $HOR_HORA_FIN= "TO_DATE('".$nsol[0]."','DD/MM/YYYY HH24:MI:SS')";
+            $HOR_HORA_INICIO= "TO_DATE('".$nsol[0]."','MM/DD/YYYY HH24:MI:SS')";
+            $HOR_HORA_FIN= "TO_DATE('".$nsol[0]."','MM/DD/YYYY HH24:MI:SS')";
 		
 			//VARIABLES DE INGRESO
 			
@@ -120,7 +120,7 @@ class Mhorario extends CI_Model {
 				$this->db->query($sql);
 				//print_r($sql);
 				$HOR_SECUENCIAL=$this->db->query("select max(HOR_SECUENCIAL) SECUENCIAL from HORARIO")->row()->SECUENCIAL;
-				echo json_encode(array("cod"=>$HOR_SECUENCIAL,"numero"=>$HOR_SECUENCIAL,"mensaje"=>"Junta: ".$HOR_SECUENCIAL.", insertado con éxito"));    
+				echo json_encode(array("cod"=>$HOR_SECUENCIAL,"numero"=>$HOR_SECUENCIAL,"mensaje"=>"Horario: ".$HOR_SECUENCIAL.", insertado con éxito"));    
 			}else{
 				echo json_encode(array("cod"=>1,"numero"=>1,"mensaje"=>"!!!...El Horario Ya Existe...!!!"));
 			}
