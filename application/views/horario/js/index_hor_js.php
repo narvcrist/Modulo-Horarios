@@ -23,7 +23,7 @@ jQuery(document).ready(function(){
                 ],
         rowNum:50,
         rowList : [50,100,200,800],
-        pager: '#pitemhor',
+        pager: '#hitemhor',
         sortname: '',
         viewrecords: true,
         height:350,
@@ -35,7 +35,7 @@ jQuery(document).ready(function(){
     });
     
 	//Botones que contendran cada evento o acción
-    $("#itemhor").jqGrid('navGrid','#pitemhor',{del:false,add:false,edit:false,refresh:true, search: false},{},{},{},{multipleSearch:true,sopt:['cn','eq']});
+    $("#itemhor").jqGrid('navGrid','#hitemhor',{del:false,add:false,edit:false,refresh:true, search: false},{},{},{},{multipleSearch:true,sopt:['cn','eq']});
     $("#itemhor").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : true});
     $("#t_itemhor").append("<button title='Nuevo Horario' id='agr_horario'>Nuevo</button>");
     $("#t_itemhor").append("<button title='Editar Horario' id='edit_horario'>Editar</button>");
