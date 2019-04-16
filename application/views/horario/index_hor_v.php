@@ -1,5 +1,5 @@
 	
-<div title="HorARIO" >
+<div title="Horario" >
 	<div style="border: 2px solid #CCC; border-radius: 5px; width:96%; display: flex; justify-content: center; align-items: center;">
 		<h4>Administración de Horarios</h4>
 	</div>	

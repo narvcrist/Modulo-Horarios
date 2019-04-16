@@ -138,8 +138,12 @@ class Mhorario extends CI_Model {
             $HOR_HORA_INICIO="TO_DATE('".$HORA_INICIO."','DD/MM/YYYY HH24:MI:SS')";
             $HORA_FIN=prepCampoAlmacenar($this->input->post('HOR_HORA_FIN'));	
             $HOR_HORA_FIN="TO_DATE('".$HORA_FIN."','DD/MM/YYYY HH24:MI:SS')";			
-			$HOR_DIA=prepCampoAlmacenar($this->input->post('HOR_DIA'));					
-    
+            $HOR_DIA=prepCampoAlmacenar($this->input->post('HOR_DIA'));		
+            
+
+            $sqlHORARIOVALIDA="select count(*) NUM_HORARIO from HORARIO WHERE HOR_SEC_PERSONA='{$HOR_SEC_PERSONA }' and HOR_ESTADO=0";
+			$NUM_HORARIO =$this->db->query($sqlHORARIOVALIDA)->row()->NUM_HORARIO ;
+			if($NUM_HORARIO ==0){
 				$sql="UPDATE HORARIO SET
 							HOR_SEC_PERSONA=$HOR_SEC_PERSONA,
                             HOR_SEC_MATRICULA=$HOR_SEC_MATRICULA,
@@ -148,9 +152,13 @@ class Mhorario extends CI_Model {
 							HOR_DIA='$HOR_DIA'
                             
                  WHERE HOR_SECUENCIAL=$HOR_SECUENCIAL";
-         $this->db->query($sql);
-		 //print_r($sql);
-         echo json_encode(array("cod"=>1,"numero"=>$HOR_SECUENCIAL,"mensaje"=>"Horario: ".$HOR_SECUENCIAL.", editado con éxito"));            
+        	$this->db->query($sql);
+            //print_r($sql);
+            $HOR_SECUENCIAL=$this->db->query("select max(HOR_SECUENCIAL) SECUENCIAL from HORARIO")->row()->SECUENCIAL;
+            echo json_encode(array("cod"=>$HOR_SECUENCIAL,"numero"=>$HOR_SECUENCIAL,"mensaje"=>"Horario: ".$HOR_SECUENCIAL.", insertado con éxito"));    
+        }else{
+            echo json_encode(array("cod"=>1,"numero"=>1,"mensaje"=>"!!!...El Horario Ya Existe...!!!"));
+        }          
     }
 }
 ?>
