@@ -172,7 +172,7 @@ function VerificarCorreo($direccion){
 					return 1;
 				}
 		}
-//combo para obtener Personas
+//combo para obtener 0
 function cmb_persona($PER_SECUENCIAL = null, $attr = null){		
 	$sql = "select PER_SECUENCIAL,PER_APELLIDOS,PER_NOMBRES,PER_CEDULA 
 			from PERSONA 
@@ -213,7 +213,81 @@ function cmb_matricula($MATR_SECUENCIAL = null, $attr = null){
    } else {
 		return alerta("No Posee Matricula. <input type='hidden' name='matricula' value='' />");
 	}
+} 
+//combo para obtener Tipo calificacion
+function cmb_tipocalificacion($TIPCAL_SECUENCIAL = null, $attr = null){		
+	$sql = "select TIPCAL_SECUENCIAL,TIPCAL_PORCENTAJE 
+			from TIPOCALIFICACION 
+			where TIPCAL_ESTADO=0";
+	$results = $this->db->query($sql)->result_array();
+	$output = array();
+	if (count($results) > 0) {
+		$output[null] = "TipoCalificacion...";
+		foreach ($results as $result) {
+			$output[$result['TIPCAL_SECUENCIAL']] = utf8_encode($result['TIPCAL_PORCENTAJE']);
+		}
+		return form_dropdown('tipocalificacion', $output, $TIPCAL_SECUENCIAL, $attr);
+   } else {
+		return alerta("No Posee Calificaciones. <input type='hidden' name='tipocalificacion' value='' />");
+	}
 }
-	
+//combo para obtener juntas
+function cmb_junta($JUN_SECUENCIAL = null, $attr = null){
+		
+	$sql = "select JUN_SECUENCIAL,JUN_NOMBRE 
+			from JUNTA 
+			WHERE JUN_ESTADO=0 
+			ORDER BY JUN_NOMBRE ASC";
+	$results = $this->db->query($sql)->result_array();
+	$output = array();
+	if (count($results) > 0) {
+		$output[null] = "Junta...";
+		foreach ($results as $result) {
+			$output[$result['JUN_SECUENCIAL']] = utf8_encode($result['JUN_NOMBRE']);
+		}
+		return form_dropdown('junta', $output, $JUN_SECUENCIAL, $attr);
+   } else {
+		return alerta("No Posee Juntas. <input type='hidden' name='junta' value='' />");
+	}
+}	
+//combo para obtener licencias
+function cmb_licencia($LIC_SECUENCIAL = null, $attr = null){
+		
+	$sql = "select LIC_SECUENCIAL,LIC_NOMBRE 
+			from LICENCIA 
+			WHERE LIC_ESTADO=0
+			ORDER BY LIC_NOMBRE ASC";
+	$results = $this->db->query($sql)->result_array();
+	$output = array();
+	if (count($results) > 0) {
+		$output[null] = "Licencia...";
+		foreach ($results as $result) {
+			$output[$result['LIC_SECUENCIAL']] = utf8_encode($result['LIC_NOMBRE']);
+		}
+		return form_dropdown('licencia', $output, $LIC_SECUENCIAL, $attr);
+   } else {
+		return alerta("No Posee licencias. <input type='hidden' name='licencia' value='' />");
+	}
+}
+//combo para obtener Aspirantes
+function cmb_aspirante($ASP_SECUENCIAL = null, $attr = null){
+		
+	$sql = "select ASP_SECUENCIAL,ASP_NOMBRE,ASP_NUM_TIEMPODURACION
+			from ASPIRANTE
+			WHERE ASP_ESTADO=0 
+			ORDER BY ASP_NOMBRE ASC";
+	$results = $this->db->query($sql)->result_array();
+	$output = array();
+	if (count($results) > 0) {
+		$output[null] = "Aspirante...";
+		foreach ($results as $result) {
+			$output[$result['ASP_SECUENCIAL']] = utf8_encode($result['ASP_NOMBRE'])." - ".utf8_encode($result['ASP_NUM_TIEMPODURACION']);
+		}
+		return form_dropdown('aspirante', $output, $ASP_SECUENCIAL, $attr);
+   } else {
+		return alerta("No Posee Aspitantes. <input type='hidden' name='aspirante' value='' />");
+	}
+}
+
 }
 ?>
