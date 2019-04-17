@@ -22,7 +22,7 @@ jQuery(document).ready(function(){
 					{name:'HOR_ESTADO',index:'HOR_ESTADO',searchable:false, width:40,align:"center", edittype:'select', formatter:'select', editoptions:{value:"0:<span class='ui-icon ui-icon-circle-check ui-icon-extra'>Activo</span>;1:<span class='ui-icon ui-icon-circle-close ui-icon-extra'>Pasivo</span>"}}
                 ],
         rowNum:50,
-        rowList : [50,100,200,800],
+        rowList : [50,100,200,800], 
         pager: '#hitemhor',
         sortname: '',
         viewrecords: true,

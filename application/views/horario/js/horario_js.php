@@ -103,7 +103,9 @@ $("#fhorario").validate({
 			//"HOR_FECHAINGRESO":{required:true},
 			"HOR_HORA_INICIO":{required:true},
 			"HOR_HORA_FIN":{required:true},
-			"HOR_DIA":{required:true}			
+			"HOR_DIA":{required:true},
+            persona:{required:true},
+            matricula:{required:true}		
              }
      });     
 });
