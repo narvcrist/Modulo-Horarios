@@ -24,7 +24,7 @@
 							Día(*)
 						</th>
                         <td>
-                            <input type="text" maxlength="99" style="width:100px;" name="HOR_DIA" id="HOR_DIA" value="<?php echo !empty($sol->HOR_DIA) ? prepCampoMostrar($sol->HOR_DIA) : null ; ?>"  />
+                            <input type="text" maxlength="99" style="width:150px;" name="HOR_DIA" id="HOR_DIA" value="<?php echo !empty($sol->HOR_DIA) ? prepCampoMostrar($sol->HOR_DIA) : null ; ?>"  />
 						</td>
 						<th>
 							Persona
