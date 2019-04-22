@@ -25,13 +25,11 @@ class Maporte extends CI_Model {
 										FROM MATRICULA WHERE MATR_SECUENCIAL=APO_SEC_MATRICULA) APO_SEC_MATRICULA",
 										"(SELECT CONCAT(CONCAT(PER_NOMBRES,' '),PER_APELLIDOS) FROM PERSONA WHERE PER_SECUENCIAL=APO_SEC_PERSONA)
 										 APO_SEC_PERSONA",
-										"(select TIPCAL_PORCENTAJE 
-										from TIPOCALIFICACION 
-										where TIPCAL_SECUENCIAL=APO_SEC_TIPOCALIFICACION) APO_SEC_TIPOCALIFICACION",
 										"APO_NOTA1",
 										"APO_NOTA2",
 										"APO_NOTA3",
 										"APO_NOTA4",
+										"(apo_nota1+apo_nota2+apo_nota3+apo_nota4) TOTAL",
 										"to_char(APO_FECHALIMITE, 'DD-MM-YYY HH24:MI:SS')APO_FECHALIMITE",
 										"APO_RESPONSABLE_CREA",
 										"APO_RESPONSABLE_EDITA",
@@ -42,11 +40,11 @@ class Maporte extends CI_Model {
 										"APO_FECHAINGRESO",
 										"APO_SEC_MATRICULA",
 										"APO_SEC_PERSONA",
-										"APO_SEC_TIPOCALIFICACION",
 										"APO_NOTA1",
 										"APO_NOTA2",
 										"APO_NOTA3",
 										"APO_NOTA4",
+										"TOTAL",
 										"APO_FECHALIMITE",
 										"APO_RESPONSABLE_CREA",
 										"APO_RESPONSABLE_EDITA",
@@ -63,7 +61,6 @@ class Maporte extends CI_Model {
 							APO_FECHAINGRESO,
 							APO_SEC_MATRICULA,
 							APO_SEC_PERSONA,
-							APO_SEC_TIPOCALIFICACION,
 							APO_NOTA1,
 							APO_NOTA2,
 							APO_NOTA3,
@@ -80,7 +77,6 @@ class Maporte extends CI_Model {
 							APO_FECHAINGRESO,
 							APO_SEC_MATRICULA,
 							APO_SEC_PERSONA,
-							APO_SEC_TIPOCALIFICACION,
 							APO_NOTA1,
 							APO_NOTA2,
 							APO_NOTA3,
@@ -106,7 +102,6 @@ class Maporte extends CI_Model {
 			//VARIABLES DE INGRESO			
 			$APO_SEC_MATRICULA=$this->input->post('matricula');			
 			$APO_SEC_PERSONA=$this->input->post('persona');			
-			$APO_SEC_TIPOCALIFICACION=$this->input->post('tipocalificacion');			
 			$APO_NOTA1=$this->input->post('APO_NOTA1');			
 			$APO_NOTA2=$this->input->post('APO_NOTA2');			
 			$APO_NOTA3=$this->input->post('APO_NOTA3');			
@@ -115,7 +110,6 @@ class Maporte extends CI_Model {
 			$APO_FECHALIMITE="TO_DATE('".$FECHALIMITE."','DD/MM/YYYY HH24:MI:SS')";		
 			$APO_RESPONSABLE_CREA=$this->session->userdata('US_CODIGO');
 			$APO_RESPONSABLE_EDITA=$this->session->userdata('US_CODIGO');
-
 			$sqlAPORTEVALIDA="select count(*) NUM_APORTE from APORTES WHERE APO_SEC_PERSONA='{$APO_SEC_PERSONA}' 
 										and APO_SEC_MATRICULA='{$APO_SEC_MATRICULA}' 
 										and APO_ESTADO=0";
@@ -125,7 +119,6 @@ class Maporte extends CI_Model {
 						APO_FECHAINGRESO,
 						APO_SEC_MATRICULA,
 						APO_SEC_PERSONA,
-						APO_SEC_TIPOCALIFICACION,
 						APO_NOTA1,
 						APO_NOTA2,
 						APO_NOTA3,
@@ -137,7 +130,6 @@ class Maporte extends CI_Model {
 						$APO_FECHAINGRESO,
 						$APO_SEC_MATRICULA,
 						$APO_SEC_PERSONA,
-						$APO_SEC_TIPOCALIFICACION,
 						$APO_NOTA1,
 						$APO_NOTA2,
 						$APO_NOTA3,
@@ -160,7 +152,6 @@ class Maporte extends CI_Model {
 			//VARIABLES DE INGRESO
 			$APO_SEC_MATRICULA=$this->input->post('matricula');			
 			$APO_SEC_PERSONA=$this->input->post('persona');			
-			$APO_SEC_TIPOCALIFICACION=$this->input->post('tipocalificacion');			
 			$APO_NOTA1=$this->input->post('APO_NOTA1');			
 			$APO_NOTA2=$this->input->post('APO_NOTA2');			
 			$APO_NOTA3=$this->input->post('APO_NOTA3');			
@@ -168,15 +159,11 @@ class Maporte extends CI_Model {
 			$FECHALIMITE=prepCampoAlmacenar($this->input->post('APO_FECHALIMITE'));	
 			$APO_FECHALIMITE="TO_DATE('".$FECHALIMITE."','DD/MM/YYYY HH24:MI:SS')";
 			$APO_RESPONSABLE_EDITA=$this->session->userdata('US_CODIGO');				
-			//VARIABLES DE RUTAS
-			//$PER_ASIST_RUTA=NULL;
-			//$PER_ASIST_RUTAANT=NULL;
-			//$PER_DOCUM_RUTA=NULL;
-			//$PER_DOCUM_RUTAANT=NULL;
+			
+			
 				$sql="UPDATE APORTES SET
 							APO_SEC_MATRICULA=$APO_SEC_MATRICULA,
 							APO_SEC_PERSONA=$APO_SEC_PERSONA,
-							APO_SEC_TIPOCALIFICACION=$APO_SEC_TIPOCALIFICACION,
 							APO_NOTA1=$APO_NOTA1,
 							APO_NOTA2=$APO_NOTA2,
 							APO_NOTA3=$APO_NOTA3,
@@ -186,7 +173,7 @@ class Maporte extends CI_Model {
                  WHERE APO_SECUENCIAL=$APO_SECUENCIAL";
          $this->db->query($sql);
 		 //print_r($sql);
-         echo json_encode(array("cod"=>1,"numero"=>$APO_SECUENCIAL,"mensaje"=>"Aporte: ".$APO_SECUENCIAL.", editado con éxito"));            
+		 echo json_encode(array("cod"=>1,"numero"=>$APO_SECUENCIAL,"mensaje"=>"Aporte: ".$APO_SECUENCIAL.", editado con éxito"));
 	}
 }
 ?>

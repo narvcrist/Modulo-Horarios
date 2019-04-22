@@ -20,49 +20,42 @@
 						<td>
 							<?php echo $combo_persona; ?>
 						</td>
-						
-						<th>
-							Tipo de Calificacion(*)
-                        </th>
-                        <td>
-						<?php echo $combo_tipocalificacion; ?>
-						</td>
-                    </tr>
-                    <tr>
-						<th>
-							NOTA 1(*)
-						</th>
-                        <td>
-                            <input type="number" maxlength="99" style="width:90px;" name="APO_NOTA1" id="APO_NOTA1" value="<?php echo !empty($sol->APO_NOTA1) ? prepCampoMostrar($sol->APO_NOTA1) : 0 ; ?>"  />
-						</td>
-					   
-						<th>
-							NOTA 2(*)
-						</th>
-						<td>
-                            <input type="number" maxlength="99" style="width:90px;" name="APO_NOTA2" id="APO_NOTA2" value="<?php echo !empty($sol->APO_NOTA2) ? prepCampoMostrar($sol->APO_NOTA2) : 0; ?>"  />
-						</td>
-						<th>
-							NOTA 3(*)
-                        </th>
-                        <td>
-                            <input type="number" maxlength="99" style="width:90px;" name="APO_NOTA3" id="APO_NOTA3" value="<?php echo !empty($sol->APO_NOTA3) ? prepCampoMostrar($sol->APO_NOTA3) : 0 ; ?>"  />
-						</td>				
-					</tr>
-					<tr>
-						<th>
-							NOTA 4(*)
-                        </th>
-                        <td>
-                            <input type="number" maxlength="99" style="width:90px;" name="APO_NOTA4" id="APO_NOTA4" value="<?php echo !empty($sol->APO_NOTA4) ? prepCampoMostrar($sol->APO_NOTA4) : 0 ; ?>"  />
-						</td>
 						<th>
 							Fecha Limite
 						</th>
                         <td>
 						<input type="text" style="width:150px;" name="APO_FECHALIMITE" id="APO_FECHALIMITE" value="<?php echo !empty($sol->APO_FECHALIMITE) ? prepCampoMostrar($sol->APO_FECHALIMITE) : null ; ?>" />
 						</td>
+						
+                    </tr>
+                    <tr>
+						<th>
+							NOTA 1(*)
+						</th>
+                        <td>
+                            <input type="number" step="0.1" min="0" max="99" style="width:90px;" name="APO_NOTA1" id="APO_NOTA1" value="<?php echo !empty($sol->APO_NOTA1) ? prepCampoMostrar($sol->APO_NOTA1) : 0 ; ?>"  />
+						</td>			   
+						<th>
+							NOTA 3(*)
+                        </th>
+                        <td>
+                            <input type="number" step="0.1" min="0" max="99" style="width:90px;" name="APO_NOTA3" id="APO_NOTA3" value="<?php echo !empty($sol->APO_NOTA3) ? prepCampoMostrar($sol->APO_NOTA3) : 0 ; ?>"  />
+						</td>
+						<tr>
+						<th>
+							NOTA 2(*)
+						</th>
+						<td>
+                            <input type="number" step="0.1" min="0" max="99" style="width:90px;" name="APO_NOTA2" id="APO_NOTA2" value="<?php echo !empty($sol->APO_NOTA2) ? prepCampoMostrar($sol->APO_NOTA2) : 0; ?>"  />
+						</td>
+						<th>
+							NOTA 4(*)
+                        </th>
+                        <td>
+                            <input type="number" step="0.1" min="0" max="99" style="width:90px;" name="APO_NOTA4" id="APO_NOTA4" value="<?php echo !empty($sol->APO_NOTA4) ? prepCampoMostrar($sol->APO_NOTA4) : 0 ; ?>"  />
+						</td>				
 					</tr>
+		
 							
 						<?php if($accion=='n'|$accion=='e') : ?>                    
                             
