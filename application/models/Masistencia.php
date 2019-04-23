@@ -123,9 +123,9 @@ class Masistencia extends CI_Model {
         $this->db->query($sql);
         //print_r($sql);
         $AST_SECUENCIAL=$this->db->query("select max(AST_SECUENCIAL) SECUENCIAL from ASISTENCIA")->row()->SECUENCIAL;
-        echo json_encode(array("cod"=>$AST_SECUENCIAL,"numero"=>$AST_SECUENCIAL,"mensaje"=>"Asistencia: ".$AST_SECUENCIAL.", insertado con éxito"));    
+        echo json_encode(array("cod"=>$AST_SECUENCIAL,"numero"=>$AST_SECUENCIAL,"mensaje"=>"Asistencia: ".$AST_SECUENCIAL.", insertada con éxito"));    
     }else{     
-        echo json_encode(array("cod"=>1,"numero"=>1,"mensaje"=>"!!!...El asistencia Ya Existe...!!!"));
+        echo json_encode(array("cod"=>1,"numero"=>1,"mensaje"=>"!!!...La asistencia Ya Existe...!!!"));
     }
         
 }
@@ -141,6 +141,27 @@ class Masistencia extends CI_Model {
             $AST_FECHAINGRESO="TO_DATE('".$FECHAINGRESO."','DD/MM/YYYY HH24:MI:SS')";
             $FECHASALIDA =prepCampoAlmacenar($this->input->post('AST_FECHASALIDA'));
             $AST_FECHASALIDA="TO_DATE('".$FECHASALIDA."','DD/MM/YYYY HH24:MI:SS')";		
+			
+			
+			$sqlREPETICION1="select AST_SECUENCIAL,AST_SEC_MATRICULA 
+							from asistencia
+							where AST_SECUENCIAL='{$AST_SECUENCIAL}'
+							and ast_estado=0";
+			$repe1 =$this->db->query($sqlREPETICION1)->row();
+			
+			$sqlREPETICION2="select AST_SECUENCIAL,AST_SEC_MATRICULA 
+							from asistencia
+							where AST_SEC_MATRICULA='{$AST_SEC_MATRICULA}'
+							and ast_estado=0";
+			$repe2 =$this->db->query($sqlREPETICION2)->row();
+
+			$sqlREPETICION="select count(*) NUM_REPETICION
+							from asistencia
+							where AST_SEC_MATRICULA='{$AST_SEC_MATRICULA}'
+							and ast_estado=0";
+			$NUM_REPETICION =$this->db->query($sqlREPETICION)->row()->NUM_REPETICION;
+			
+		if(($repe1->AST_SECUENCIAL==$repe2->AST_SECUENCIAL) or ($NUM_REPETICION==0)){
             
 				$sql="UPDATE ASISTENCIA SET
 							AST_SEC_MATRICULA=$AST_SEC_MATRICULA,
@@ -148,11 +169,15 @@ class Masistencia extends CI_Model {
 							AST_FECHAINGRESO=$AST_FECHAINGRESO,
 							AST_FECHASALIDA=$AST_FECHASALIDA
 							WHERE AST_SECUENCIAL=$AST_SECUENCIAL";
-		 $this->db->query($sql);
-
-		 //print_r($sql);
-         echo json_encode(array("cod"=>1,"numero"=>$AST_SECUENCIAL,"mensaje"=>"Asistencia: ".$AST_SECUENCIAL.", editado con éxito"));            
-
+	
+		$this->db->query($sql);
+               //print_r($sql);
+		 $AST_SECUENCIAL=$this->db->query("select max(AST_SECUENCIAL) SECUENCIAL from ASISTENCIA")->row()->SECUENCIAL;
+		 echo json_encode(array("cod"=>$AST_SECUENCIAL,"numero"=>$AST_SECUENCIAL,"mensaje"=>"Asistencia: ".$AST_SECUENCIAL.", editado con éxito"));    
+	}else{     
+		 echo json_encode(array("cod"=>1,"numero"=>1,"mensaje"=>"!!!...La asistencia ya existe ...!!!"));
+                
+	}
    }    
 }
 ?>
