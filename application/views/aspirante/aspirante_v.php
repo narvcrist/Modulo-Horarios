@@ -17,7 +17,7 @@
 							Tiempo de duración
 						</th>
                         <td>
-                            <input type="number" max="99" min="0" step="1" style="width:75px;" name="ASP_NUM_TIEMPODURACION" id="ASP_NUM_TIEMPODURACION" value="<?php echo !empty($sol->ASP_NUM_TIEMPODURACION) ? prepCampoMostrar($sol->ASP_NUM_TIEMPODURACION) : null ; ?>"/> días
+                            <input type="number" max="1000" min="0" step="1" style="width:75px;" name="ASP_NUM_TIEMPODURACION" id="ASP_NUM_TIEMPODURACION" value="<?php echo !empty($sol->ASP_NUM_TIEMPODURACION) ? prepCampoMostrar($sol->ASP_NUM_TIEMPODURACION) : null ; ?>"/> días
 						</td>
                     </tr>
                     <tr>    

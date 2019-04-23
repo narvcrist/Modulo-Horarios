@@ -201,7 +201,7 @@ class Mpersona extends CI_Model {
 			$PER_TITULO=prepCampoAlmacenar($this->input->post('PER_TITULO'));
 			$PER_LUGAR_ESTUDIO=prepCampoAlmacenar($this->input->post('ciudad_estudios'));
 			$PER_DIRECCION_ESTUDIO=prepCampoAlmacenar($this->input->post('PER_DIRECCION_ESTUDIO'));			
-			$PER_LUGAR_RESIDENCIA=$prepCampoAlmacenar($this->input->post('ciudad_residencia'));
+			$PER_LUGAR_RESIDENCIA=$this->input->post('ciudad_residencia');
 			$PER_DIRECCION_RESIDENCIA=prepCampoAlmacenar($this->input->post('PER_DIRECCION_RESIDENCIA'));			
 			$PER_LUGAR_NACIMIENTO=$this->input->post('ciudad_nacimiento');
 			$PER_DIRECCION_NACIMIENTO=prepCampoAlmacenar($this->input->post('PER_DIRECCION_NACIMIENTO'));			

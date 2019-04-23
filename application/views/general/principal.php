@@ -51,10 +51,11 @@
 							<li><a title="Administración Parametros del Sistema" href="#">Administración</a> 
 								<ul>
 									<li> <a id="e_persona" title="Administración de Personas" name="persona/index"  class="cabecera-links" href="#">Personas</a></li>
-									<li> <a id="e_aspirante" title="Administración de Aspirantes" name="aspitante/index"  class="cabecera-links" href="#">Carreras</a></li>
+									<li> <a id="e_aspirante" title="Administración de Aspirantes" name="aspirante/index"  class="cabecera-links" href="#">Carreras</a></li>
 									<li> <a id="e_jornada" title="Administración de Jornadas" name="jornada/index"  class="cabecera-links" href="#">Jornadas</a></li>
 									<li> <a id="e_junta" title="Administración de Juntas" name="junta/index"  class="cabecera-links" href="#">Juntas</a></li>
 									<li> <a id="e_licencia" title="Administración de Licencias" name="licencia/index"  class="cabecera-links" href="#">Licencias</a></li>
+									<li> <a id="e_perxlic" title="Administración de persona por licencia" name="perxlic/index"  class="cabecera-links" href="#">Personas por Licencias</a></li>
 								</ul>
 							</li>
 							<li><a title="Administración Parametros de Estudios" href="#">Administración Estudios</a> 
