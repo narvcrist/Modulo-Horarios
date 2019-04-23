@@ -15,7 +15,7 @@ class Mpersona extends CI_Model {
               $datos->campoId = "ROWNUM";
 			   $datos->camposelect = array("ROWNUM",
 											"PER_SECUENCIAL",
-											"PER_SEC_JUNTA",
+											"(select JUN_NOMBRE from JUNTA where JUN_SECUENCIAL=PER_SEC_JUNTA) PER_SEC_JUNTA",
 											"PER_FECHAINGRESO",
 											"PER_CEDULA",
 											"PER_NOMBRES",
@@ -24,38 +24,34 @@ class Mpersona extends CI_Model {
 											"PER_CONVENCIONAL",
 											"PER_CELULAR",
 											"(CASE PER_GENERO
-											WHEN 'F' THEN 'Femenino'
 											WHEN 'M' THEN 'Masculino'
+											WHEN 'F' THEN 'Femenino'
 											ELSE '--'
 											END) PER_GENERO",
 											"PER_NOMBRE_REFERENCIA",
 											"PER_TELEFONO_REFERENCIA",
 											"(CASE PER_ESTADO_CIVIL
 											WHEN 'S' THEN 'Soltero'
+											WHEN 'U' THEN 'Unión de Hecho'
 											WHEN 'C' THEN 'Casado'
+											WHEN 'D' THEN 'Divorciado'
 											WHEN 'V' THEN 'Viudo'
-											WHEN 'U' THEN 'Soltero'
-											ELSE '--'
 											END) PER_ESTADO_CIVIL",
 											"PER_TITULO",
 											"(SELECT LOC_DESCRIPCION FROM ISTCRE_APLICACIONES.LOCALIZACION 
-											WHERE LOC_SECUENCIAL= PER_LUGAR_ESTUDIO) 
-											PER_LUGAR_ESTUDIO" ,
+											WHERE LOC_SECUENCIAL=PER_LUGAR_ESTUDIO) PER_LUGAR_ESTUDIO ",
 											"PER_DIRECCION_ESTUDIO",
 											"(SELECT LOC_DESCRIPCION FROM ISTCRE_APLICACIONES.LOCALIZACION 
-											WHERE LOC_SECUENCIAL= PER_LUGAR_RESIDENCIA) 
-											PER_LUGAR_RESIDENCIA" ,
+											WHERE LOC_SECUENCIAL=PER_LUGAR_RESIDENCIA) PER_LUGAR_RESIDENCIA",
 											"PER_DIRECCION_RESIDENCIA",
 											"(SELECT LOC_DESCRIPCION FROM ISTCRE_APLICACIONES.LOCALIZACION 
-											WHERE LOC_SECUENCIAL= PER_LUGAR_NACIMIENTO) 
-											PER_LUGAR_NACIMIENTO" ,
+											WHERE LOC_SECUENCIAL=PER_LUGAR_NACIMIENTO) PER_LUGAR_NACIMIENTO",
 											"PER_DIRECCION_NACIMIENTO",
 											"(SELECT LOC_DESCRIPCION FROM ISTCRE_APLICACIONES.LOCALIZACION 
-											WHERE LOC_SECUENCIAL= PER_LUGAR_TRABAJO) 
-											PER_LUGAR_TRABAJO" ,
+											WHERE LOC_SECUENCIAL=PER_LUGAR_TRABAJO) PER_LUGAR_TRABAJO",
 											"PER_DIRECCION_TRABAJO",
 											"PER_TELEFONO_TRABAJO",
-											"PER_NIVEL_CONDUCCION",
+											"CONCAT(PER_NIVEL_CONDUCCION,'%') PER_NIVEL_CONDUCCION",
 											"(CASE PER_TIPO_SANGRE
 											WHEN 'AP' THEN 'A+'
 											WHEN 'AN' THEN 'A-'
@@ -65,7 +61,6 @@ class Mpersona extends CI_Model {
 											WHEN 'ON' THEN 'O-'
 											WHEN 'ABP' THEN 'AB+'
 											WHEN 'ABN' THEN 'AB-'
-											ELSE '--'
 											END) PER_TIPO_SANGRE",
 											"PER_RESPONSABLE",
 											"PER_ESTADO");
@@ -192,7 +187,7 @@ class Mpersona extends CI_Model {
 			
 			//VARIABLES DE INGRESO
 			$PER_GENERO=$this->input->post('genero');
-			$PER_SEC_JUNTA=$this->input->post('PER_SEC_JUNTA');
+			$PER_SEC_JUNTA=$this->input->post('junta');
 			$PER_CEDULA=prepCampoAlmacenar($this->input->post('PER_CEDULA'));			
 			$PER_NOMBRES=prepCampoAlmacenar($this->input->post('PER_NOMBRES'));			
 			$PER_APELLIDOS=prepCampoAlmacenar($this->input->post('PER_APELLIDOS'));			
@@ -203,14 +198,14 @@ class Mpersona extends CI_Model {
 			$PER_NOMBRE_REFERENCIA=prepCampoAlmacenar($this->input->post('PER_NOMBRE_REFERENCIA'));			
 			$PER_TELEFONO_REFERENCIA=prepCampoAlmacenar($this->input->post('PER_TELEFONO_REFERENCIA'));			
 			$PER_ESTADO_CIVIL=prepCampoAlmacenar($this->input->post('civil'));			
-			$PER_TITULO=prepCampoAlmacenar($this->input->post('PER_TITULO'));			
-			$PER_LUGAR_ESTUDIO=$this->input->post('ciudad_estudios');
+			$PER_TITULO=prepCampoAlmacenar($this->input->post('PER_TITULO'));
+			$PER_LUGAR_ESTUDIO=prepCampoAlmacenar($this->input->post('ciudad_estudios'));
 			$PER_DIRECCION_ESTUDIO=prepCampoAlmacenar($this->input->post('PER_DIRECCION_ESTUDIO'));			
-			$PER_LUGAR_RESIDENCIA=$this->input->post('cuidad_residencia');
+			$PER_LUGAR_RESIDENCIA=$prepCampoAlmacenar($this->input->post('ciudad_residencia'));
 			$PER_DIRECCION_RESIDENCIA=prepCampoAlmacenar($this->input->post('PER_DIRECCION_RESIDENCIA'));			
-			$PER_LUGAR_NACIMIENTO=$this->input->post('cuidad_nacimiento');
+			$PER_LUGAR_NACIMIENTO=$this->input->post('ciudad_nacimiento');
 			$PER_DIRECCION_NACIMIENTO=prepCampoAlmacenar($this->input->post('PER_DIRECCION_NACIMIENTO'));			
-			$PER_LUGAR_TRABAJO=$this->input->post('cuidad_trabajo');			
+			$PER_LUGAR_TRABAJO=$this->input->post('ciudad_trabajo');			
 			$PER_DIRECCION_TRABAJO=prepCampoAlmacenar($this->input->post('PER_DIRECCION_TRABAJO'));			
 			$PER_TELEFONO_TRABAJO=prepCampoAlmacenar($this->input->post('PER_TELEFONO_TRABAJO'));			
 			$PER_NIVEL_CONDUCCION=$this->input->post('PER_NIVEL_CONDUCCION');
@@ -297,7 +292,7 @@ class Mpersona extends CI_Model {
 			
 			//VARIABLES DE INGRESO
 			$PER_GENERO=$this->input->post('genero');
-			$PER_SEC_JUNTA=$this->input->post('PER_SEC_JUNTA');
+			$PER_SEC_JUNTA=$this->input->post('junta');
 			$PER_CEDULA=prepCampoAlmacenar($this->input->post('PER_CEDULA'));			
 			$PER_NOMBRES=prepCampoAlmacenar($this->input->post('PER_NOMBRES'));			
 			$PER_APELLIDOS=prepCampoAlmacenar($this->input->post('PER_APELLIDOS'));			
@@ -308,18 +303,38 @@ class Mpersona extends CI_Model {
 			$PER_NOMBRE_REFERENCIA=prepCampoAlmacenar($this->input->post('PER_NOMBRE_REFERENCIA'));			
 			$PER_TELEFONO_REFERENCIA=prepCampoAlmacenar($this->input->post('PER_TELEFONO_REFERENCIA'));			
 			$PER_ESTADO_CIVIL=prepCampoAlmacenar($this->input->post('civil'));			
-			$PER_TITULO=prepCampoAlmacenar($this->input->post('PER_TITULO'));			
-			$PER_LUGAR_ESTUDIO=$this->input->post('ciudad_estudios');
+			$PER_TITULO=prepCampoAlmacenar($this->input->post('PER_TITULO'));
+			$LUGAR_ESTUDIO=prepCampoAlmacenar($this->input->post('ciudad_estudios'));
+			if(!empty($LUGAR_ESTUDIO)){
+				$PER_LUGAR_ESTUDIO=$LUGAR_ESTUDIO;
+			}else{
+				$PER_LUGAR_ESTUDIO=0;
+			}
 			$PER_DIRECCION_ESTUDIO=prepCampoAlmacenar($this->input->post('PER_DIRECCION_ESTUDIO'));			
-			$PER_LUGAR_RESIDENCIA=$this->input->post('ciudad_residencia');
+			$LUGAR_RESIDENCIA=prepCampoAlmacenar($this->input->post('ciudad_residencia'));
+			if(!empty($LUGAR_RESIDENCIA)){
+				$PER_LUGAR_RESIDENCIA=$LUGAR_RESIDENCIA;
+			}else{
+				$PER_LUGAR_RESIDENCIA=0;
+			}
 			$PER_DIRECCION_RESIDENCIA=prepCampoAlmacenar($this->input->post('PER_DIRECCION_RESIDENCIA'));			
-			$PER_LUGAR_NACIMIENTO=$this->input->post('ciudad_nacimiento');
-			$PER_DIRECCION_NACIMIENTO=prepCampoAlmacenar($this->input->post('PER_DIRECCION_NACIMIENTO'));			
-			$PER_LUGAR_TRABAJO=$this->input->post('ciudad_trabajo');			
+			$LUGAR_NACIMIENTO=$this->input->post('ciudad_nacimiento');
+			if(!empty($LUGAR_NACIMIENTO)){
+				$PER_LUGAR_NACIMIENTO=$LUGAR_NACIMIENTO;
+			}else{
+				$PER_LUGAR_NACIMIENTO=0;
+			}
+			$PER_DIRECCION_NACIMIENTO=prepCampoAlmacenar($this->input->post('PER_DIRECCION_NACIMIENTO'));
+			$LUGAR_TRABAJO=$this->input->post('ciudad_trabajo');
+			if(!empty($LUGAR_TRABAJO)){
+				$PER_LUGAR_TRABAJO=$LUGAR_TRABAJO;
+			}else{
+				$PER_LUGAR_TRABAJO=0;
+			}
 			$PER_DIRECCION_TRABAJO=prepCampoAlmacenar($this->input->post('PER_DIRECCION_TRABAJO'));			
 			$PER_TELEFONO_TRABAJO=prepCampoAlmacenar($this->input->post('PER_TELEFONO_TRABAJO'));			
 			$PER_NIVEL_CONDUCCION=$this->input->post('PER_NIVEL_CONDUCCION');
-			$PER_TIPO_SANGRE=prepCampoAlmacenar($this->input->post('tipoSangre'));			
+			$PER_TIPO_SANGRE=prepCampoAlmacenar($this->input->post('tipoSangre'));		
 			
 			//VARIABLES DE RUTAS
 			$PER_ASIST_RUTA=NULL;

@@ -69,7 +69,7 @@ $("#edit_licencia").jMostrarNoGrid({
 	        idButton:"#edit_licencia",
 	        errorMens:"",
 	        url: "licencia/verLicencia/e",
-	        titulo: "Editar Persona",
+	        titulo: "Editar Licencia",
               //  alto:900,
 	        ancho:1024,
 	        posicion: "top",
@@ -91,7 +91,7 @@ $("#edit_licencia").jMostrarNoGrid({
             }
             });
 
-//Evento para ver la informacion de un persona			
+//Evento para ver la informacion de un licencia			
 $("#ver_licencia").jMostrarNoGrid({
 	        id:"#itemlic",
 	        idButton:"#ver_licencia",
@@ -115,7 +115,7 @@ $("#ver_licencia").jMostrarNoGrid({
 	            };
 	        }
             });
-            //Actualiza la persona
+            //Actualiza la licencia
             $("#itemlic").jRecargar({
                 id:"#itemlic",
                 showText:true,
@@ -123,7 +123,7 @@ $("#ver_licencia").jMostrarNoGrid({
                 icon:"ui-icon-refresh"
 			});            
 			
-			//Actualiza la persona
+			//Actualiza la licencia
             $("#itemlic").jRecargar({
                 id:"#itemlic",
                 showText:true,
@@ -131,7 +131,7 @@ $("#ver_licencia").jMostrarNoGrid({
                 icon:"ui-icon-refresh"
 			});
 
-//Evento para eliminar una persona
+//Evento para eliminar una licencia
  $("#anular_licencia").jMostrarNoGrid({
 	        id:"#itemlic",
 	        idButton:"#anular_licencia",

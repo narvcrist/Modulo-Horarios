@@ -1,5 +1,5 @@
 <div id="accordion">
-  <h3>Ingrese Una Nose</h3>
+  <h3>Ingrese Una Licencia para la Persona</h3>
   
         <form id="fperxlic">
             <div id="cabecera">

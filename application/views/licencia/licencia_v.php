@@ -1,5 +1,5 @@
 <div id="accordion">
-  <h3>Ingrese Una Persona</h3>
+  <h3>Ingrese Una Licencia</h3>
   
         <form id="flicencia">
             <div id="cabecera">

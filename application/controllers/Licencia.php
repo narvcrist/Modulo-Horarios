@@ -17,7 +17,7 @@ class Licencia extends CI_Controller{
             echo  $this->mlicencia->getdatosItems();
         }
         	
-	//funcion para cear una nueva persona
+	//funcion para cear una nueva licencia
 	public function nuevaLicencia(){     
             $datos=$this->datos(null,'n');
             $datos['accion'] = 'n';
@@ -25,7 +25,7 @@ class Licencia extends CI_Controller{
             $this->load->view("licencia/licencia_v",$datos);            
         }
         
-        //funcion para ver la informacion de una persona
+        //funcion para ver la informacion de una licencia
         function verLicencia($accion=null){
             $numero = $this->input->post('NUMERO');
             if(!empty($numero)){
@@ -41,19 +41,19 @@ class Licencia extends CI_Controller{
                             echo alerta("La acción no es reconocida");
                       }
             }else{
-                echo alerta("No se puede mostrar el formulario, debe seleccionar una persona para continuar.");
+                echo alerta("No se puede mostrar el formulario, debe seleccionar una licencia para continuar.");
             }
         }
               
 	//funcion para dar los valores a la cabecera tanto en nuevo, como al momento de editar
 	function datos($sol,$accion){
         if ($accion=='n') {
-			//Caso para nueva persona
+			//Caso para nueva licencia
             $datos['combo_licencia']=$this->cmb_licencia(null,null," style='width:100px;' id='LIC_NOMBRE'");
             
 			//$datos=null;		
 		} else {
-            //Caso para la edición de una persona
+            //Caso para la edición de una licencia
             
             $licencia=$sol->LIC_NOMBRE;
 			$datos['combo_licencia']=$this->cmb_licencia($licencia,$sol->LIC_NOMBRE," style='width:100px;' id='LIC_NOMBRE'");
@@ -79,7 +79,7 @@ class Licencia extends CI_Controller{
         return form_dropdown('licencia', $output, $tipo, $attr);
     }
 	
-	//Administra las fonciones de nuevo y editar en una persona
+	//Administra las fonciones de nuevo y editar en una licencia
     function admLicencia($accion){
         switch($accion){
             case 'n':
@@ -91,7 +91,7 @@ class Licencia extends CI_Controller{
         }        
     }
     
-	//Cambia de estado a pasivo a un persona	
+	//Cambia de estado a pasivo a un licencia	
     function anulartoda(){
          $LIC_SECUENCIAL=$this->input->post('NUMERO');
             $SQL="update LICENCIA set LIC_ESTADO=1 where LIC_SECUENCIAL=$LIC_SECUENCIAL"; 

@@ -54,9 +54,11 @@ class Mperxlic extends CI_Model {
             $PERXLIC_SEC_PERSONA=$this->input->post('persona');	
 
             //validación...
+			//validación...
 			$sqlREPETICION="select count(*) NUM_PERSONAXLICENCIA 
                 from personaxlicencia
-                where upper(perxlic_sec_persona)=upper('{$PERXLIC_SEC_PERSONA}') 
+                where perxlic_sec_persona='{$PERXLIC_SEC_PERSONA}'
+                and PERXLIC_SEC_LICENCIA='{$PERXLIC_SEC_LICENCIA}'
                 and perxlic_estado=0";
             $NUM_PERSONAXLICENCIA=$this->db->query($sqlREPETICION)->row()->NUM_PERSONAXLICENCIA;
 
@@ -73,7 +75,7 @@ class Mperxlic extends CI_Model {
 			$PERXLIC_SECUENCIAL=$this->db->query("select max(PERXLIC_SECUENCIAL) SECUENCIAL from PERSONAXLICENCIA")->row()->SECUENCIAL;
 			echo json_encode(array("cod"=>$PERXLIC_SECUENCIAL,"numero"=>$PERXLIC_SECUENCIAL,"mensaje"=>"Licencia: ".$PERXLIC_SECUENCIAL.", insertado con éxito"));    
     }else {
-		echo json_encode(array("cod"=>1,"numero"=>1,"mensaje"=>"!!!...La Licencia Ya Se Encuentra ingresado...!!!"));
+		echo json_encode(array("cod"=>1,"numero"=>1,"mensaje"=>"!!!...La Licencia Ya Se Encuentra ingresada...!!!"));
 	}
  }
     

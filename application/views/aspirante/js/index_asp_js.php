@@ -11,12 +11,12 @@ jQuery(document).ready(function(){
 					'Observaciones','Responsable','Estado'],
           colModel:[
 					{name:'COLUMNAS',index:'COLUMNAS',align:"center",width:30,hidden:false},
-                    {name:'ASP_SECUENCIAL',index:'ASP_SECUENCIAL',align:"center",width:60},
-                    {name:'ASP_FECHAINGRESO',index:'ASP_FECHAINGRESO',align:"center", width:150},
+                    {name:'ASP_SECUENCIAL',index:'ASP_SECUENCIAL',align:"center",width:60,hidden:true},
+                    {name:'ASP_FECHAINGRESO',index:'ASP_FECHAINGRESO',align:"center", width:150,hidden:true},
 					{name:'ASP_NOMBRE',index:'ASP_NOMBRE',align:"center",  width:180},
 					{name:'ASP_NUM_TIEMPODURACION',index:'ASP_NUM_TIEMPODURACION',align:"center",  width:100},					
 					{name:'ASP_OBSERVACIONES',index:'ASP_OBSERVACIONES', width:200,align:"center"},
-					{name:'ASP_RESPONSABLE',index:'ASP_RESPONSABLE', width:100,align:"center"},
+					{name:'ASP_RESPONSABLE',index:'ASP_RESPONSABLE', width:100,align:"center",hidden:true},
 					{name:'ASP_ESTADO',index:'ASP_ESTADO',searchable:false, width:40,align:"center", edittype:'select', formatter:'select', editoptions:{value:"0:<span class='ui-icon ui-icon-circle-check ui-icon-extra'>Activo</span>;1:<span class='ui-icon ui-icon-circle-close ui-icon-extra'>Pasivo</span>"}}
                 ],
         rowNum:50,

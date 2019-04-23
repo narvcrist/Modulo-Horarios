@@ -17,7 +17,7 @@
 							Correo(*)
 						</th>
 						<td>
-                            <input type="text" maxlength="100" style="width:150px;" name="PER_EMAIL" id="PER_EMAIL" value="<?php echo !empty($sol->PER_EMAIL) ? prepCampoMostrar($sol->PER_EMAIL) : null ; ?>"  />
+                            <input type="text" maxlength="100" style="width:200px;" name="PER_EMAIL" id="PER_EMAIL" value="<?php echo !empty($sol->PER_EMAIL) ? prepCampoMostrar($sol->PER_EMAIL) : null ; ?>"  />
 						</td>
 						
 						<th>
@@ -32,14 +32,14 @@
 							Apellidos(*)
 						</th>
                         <td>
-                            <input type="text" maxlength="99" style="width:100px;" name="PER_APELLIDOS" id="PER_APELLIDOS" value="<?php echo !empty($sol->PER_APELLIDOS) ? prepCampoMostrar($sol->PER_APELLIDOS) : null ; ?>"  />
+                            <input type="text" maxlength="99" style="width:200px;" name="PER_APELLIDOS" id="PER_APELLIDOS" value="<?php echo !empty($sol->PER_APELLIDOS) ? prepCampoMostrar($sol->PER_APELLIDOS) : null ; ?>"  />
 						</td>
 					   
 						<th>
 							Nombres(*)
 						</th>
 						<td>
-                            <input type="text" maxlength="99" style="width:100px;" name="PER_NOMBRES" id="PER_NOMBRES" value="<?php echo !empty($sol->PER_NOMBRES) ? prepCampoMostrar($sol->PER_NOMBRES) : null ; ?>"  />
+                            <input type="text" maxlength="99" style="width:200px;" name="PER_NOMBRES" id="PER_NOMBRES" value="<?php echo !empty($sol->PER_NOMBRES) ? prepCampoMostrar($sol->PER_NOMBRES) : null ; ?>"  />
 						</td>
 						<th>
 							Genero(*)
@@ -66,7 +66,7 @@
 							Junta
 						</th>
                         <td>
-                            <input type="number" min="0" max="999" style="width:100px;" name="PER_SEC_JUNTA" id="PER_SEC_JUNTA" value="<?php echo !empty($sol->PER_SEC_JUNTA) ? prepCampoMostrar($sol->PER_SEC_JUNTA) : 0 ;?>" />
+                            <?php echo $combo_junta; ?>  
 						</td>
 					</tr>
 					<tr>
@@ -74,7 +74,7 @@
 							Alergias
                         </th>
                         <td colspan=6>
-                            <TEXTAREA maxlength="499" style="width:400px;" rows="1" cols="30" id="PER_ALERGIAS" name="PER_ALERGIAS"> <?php echo (!empty($sol->PER_ALERGIAS))?prepCampoMostrar($sol->PER_ALERGIAS):null; ?>  </TEXTAREA> 
+                            <TEXTAREA maxlength="499" style="width:500px;" rows="1" cols="30" id="PER_ALERGIAS" name="PER_ALERGIAS"> <?php echo (!empty($sol->PER_ALERGIAS))?prepCampoMostrar($sol->PER_ALERGIAS):null; ?>  </TEXTAREA> 
 						</td>
 					</tr>
 					<tr>
@@ -82,7 +82,7 @@
 							Nombres Referencia(*)
 						</th>
                         <td colspan=3>
-                            <input type="text" maxlength="199" style="width:100px;" name="PER_NOMBRE_REFERENCIA" id="PER_NOMBRE_REFERENCIA" value="<?php echo !empty($sol->PER_NOMBRE_REFERENCIA) ? prepCampoMostrar($sol->PER_NOMBRE_REFERENCIA) : null ; ?>"  />
+                            <input type="text" maxlength="199" style="width:400px;" name="PER_NOMBRE_REFERENCIA" id="PER_NOMBRE_REFERENCIA" value="<?php echo !empty($sol->PER_NOMBRE_REFERENCIA) ? prepCampoMostrar($sol->PER_NOMBRE_REFERENCIA) : null ; ?>"  />
 						</td>
 					   
 						<th>
@@ -94,17 +94,17 @@
 					</tr>
 					<tr>
 						<th>
-							TÍtulo
+							Titúlo
 						</th>
                         <td>
-                            <input type="text" maxlength="99" style="width:100px;" name="PER_TITULO" id="PER_TITULO" value="<?php echo !empty($sol->PER_TITULO) ? prepCampoMostrar($sol->PER_TITULO) : null ; ?>"  />
+                            <input type="text" maxlength="99" style="width:200px;" name="PER_TITULO" id="PER_TITULO" value="<?php echo !empty($sol->PER_TITULO) ? prepCampoMostrar($sol->PER_TITULO) : null ; ?>"  />
 						</td>
 					   
 						<th>
 							Nivel Conducción
 						</th>
 						<td>
-							<input type="number" min="0" max="999" style="width:100px;" name="PER_NIVEL_CONDUCCION" id="PER_NIVEL_CONDUCCION" value="<?php echo !empty($sol->PER_NIVEL_CONDUCCION) ? prepCampoMostrar($sol->PER_NIVEL_CONDUCCION) : 0 ;?>" />
+							<input type="number" min="0" max="100" step="5" style="width:50px;" name="PER_NIVEL_CONDUCCION" id="PER_NIVEL_CONDUCCION" value="<?php echo !empty($sol->PER_NIVEL_CONDUCCION) ? prepCampoMostrar($sol->PER_NIVEL_CONDUCCION) : 0 ;?>" />%
 						</td>
 						<th>
 							Tipo de Sangre
@@ -113,7 +113,8 @@
                           <?php echo $combo_tipoSangre; ?>  
                         </td>
 					</tr>
-					<th>
+					<tr>
+						<th>
 							<h5>Pais Estudios</h5>
 						</th>
 						<td>
@@ -131,19 +132,20 @@
 						<td>
 							<?php echo $combo_ciudad_estudios; ?> 
 						</td>
+					</tr>
 					<tr>
 						<th>
 							Dirección Estudios
                         </th>
                         <td colspan=6>
-                            <TEXTAREA maxlength="499" style="width:400px;" rows="1" cols="30" id="PER_DIRECCION_ESTUDIO" name="PER_DIRECCION_ESTUDIO"> <?php echo (!empty($sol->PER_DIRECCION_ESTUDIO))?prepCampoMostrar($sol->PER_DIRECCION_ESTUDIO):null; ?>  </TEXTAREA> 
+                            <TEXTAREA maxlength="499" style="width:500px;" rows="1" cols="30" id="PER_DIRECCION_ESTUDIO" name="PER_DIRECCION_ESTUDIO"> <?php echo (!empty($sol->PER_DIRECCION_ESTUDIO))?prepCampoMostrar($sol->PER_DIRECCION_ESTUDIO):null; ?>  </TEXTAREA> 
 						</td>
 					</tr>
 					<tr>
 						<th>
-							Pais Residencia
+							<h5>Pais Residencia</h5>
 						</th>
-                        <td>
+						<td>
 							<?php echo $combo_pais_residencia; ?> 
 						</td>
 						<th>
@@ -158,17 +160,18 @@
 						<td>
 							<?php echo $combo_ciudad_residencia; ?> 
 						</td>
-						<tr>
+					</tr>
+					<tr>
 						<th>
 							Dirección Residencia
                         </th>
                         <td colspan=6>
-                            <TEXTAREA maxlength="499" style="width:400px;" rows="1" cols="30" id="PER_DIRECCION_RSIDENCIA" name="PER_DIRECCION_RESIDENCIA"> <?php echo (!empty($sol->PER_DIRECCION_RESIDENCIA))?prepCampoMostrar($sol->PER_DIRECCION_RESIDENCIA):null; ?>  </TEXTAREA> 
+                            <TEXTAREA maxlength="499" style="width:500px;" rows="1" cols="30" id="PER_DIRECCION_RESIDENCIA" name="PER_DIRECCION_RESIDENCIA"> <?php echo (!empty($sol->PER_DIRECCION_RESIDENCIA))?prepCampoMostrar($sol->PER_DIRECCION_RESIDENCIA):null; ?>  </TEXTAREA> 
 						</td>
 					</tr>
 					<tr>
 						<th>
-							País Nacimiento
+							<h5>Pais Nacimiento</h5>
 						</th>
 						<td>
 							<?php echo $combo_pais_nacimiento; ?> 
@@ -185,19 +188,20 @@
 						<td>
 							<?php echo $combo_ciudad_nacimiento; ?> 
 						</td>
-						<tr>
+					</tr>
+					<tr>
 						<th>
 							Dirección Nacimiento
                         </th>
                         <td colspan=6>
-                            <TEXTAREA maxlength="499" style="width:400px;" rows="1" cols="30" id="PER_DIRECCION_NACIMIENTO" name="PER_DIRECCION_NACIMIENTO"> <?php echo (!empty($sol->PER_DIRECCION_NACIMIENTO))?prepCampoMostrar($sol->PER_DIRECCION_NACIMIENTO):null; ?>  </TEXTAREA> 
+                            <TEXTAREA maxlength="499" style="width:500px;" rows="1" cols="30" id="PER_DIRECCION_NACIMIENTO" name="PER_DIRECCION_NACIMIENTO"> <?php echo (!empty($sol->PER_DIRECCION_NACIMIENTO))?prepCampoMostrar($sol->PER_DIRECCION_NACIMIENTO):null; ?>  </TEXTAREA> 
 						</td>
 					</tr>
 					<tr>
 						<th>
-							País Trabajo
+							<h5>Pais Trabajo</h5>
 						</th>
-                        <td>
+						<td>
 							<?php echo $combo_pais_trabajo; ?> 
 						</td>
 						<th>
@@ -212,12 +216,19 @@
 						<td>
 							<?php echo $combo_ciudad_trabajo; ?> 
 						</td>
-						<tr>
+					</tr>
+					<tr>
+						<th>
+							Teléfono Trabajo
+						</th>
+						<td>
+                            <input type="text" maxlength="19" style="width:100px;" name="PER_TELEFONO_TRABAJO" id="PER_TELEFONO_TRABAJO" value="<?php echo !empty($sol->PER_TELEFONO_TRABAJO) ? prepCampoMostrar($sol->PER_TELEFONO_TRABAJO) : null ; ?>"  />
+						</td>
 						<th>
 							Dirección Trabajo
                         </th>
-                        <td colspan=6>
-                            <TEXTAREA maxlength="499" style="width:400px;" rows="1" cols="30" id="PER_DIRECCION_TRABAJO" name="PER_DIRECCION_TRABAJO"> <?php echo (!empty($sol->PER_DIRECCION_TRABAJO))?prepCampoMostrar($sol->PER_DIRECCION_TRABAJO):null; ?>  </TEXTAREA> 
+                        <td colspan=3>
+                            <TEXTAREA maxlength="499" style="width:500px;" rows="1" cols="30" id="PER_DIRECCION_TRABAJO" name="PER_DIRECCION_TRABAJO"> <?php echo (!empty($sol->PER_DIRECCION_TRABAJO))?prepCampoMostrar($sol->PER_DIRECCION_TRABAJO):null; ?>  </TEXTAREA> 
 						</td>
 					</tr>
 					

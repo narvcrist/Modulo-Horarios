@@ -14,7 +14,7 @@ class Varios extends CI_Controller{
 	//Funcion para obtener los subgrupos en base a los grupos
    function get_provincia(){
         $LOC_PAIS=$this->input->post('pais');
-		if(!empty($LOC_PAIS) and $LOC_PAIS<>null){ //Diferente vacio y diferente de nulo
+		if(!empty($LOC_PAIS) and $LOC_PAIS<>null){
         $output = "";
         $query = $this->db->query("select LOC_SECUENCIAL, LOC_DESCRIPCION 
 										FROM ISTCRE_APLICACIONES.LOCALIZACION 
@@ -23,7 +23,7 @@ class Varios extends CI_Controller{
 										AND LOC_PREDECESOR=$LOC_PAIS
 										order by LOC_DESCRIPCION");
         $results = $query->result();
-        $output .='<option value="">Provincia...</option>'; //El punto es para concatenar
+        $output .='<option value="">Provincia...</option>';
         foreach ($results as $result):
                 $output .="<option value="."'".$result->LOC_SECUENCIAL."'".">".prepCampoMostrar($result->LOC_DESCRIPCION)."</option>";
         endforeach;
@@ -82,5 +82,20 @@ class Varios extends CI_Controller{
 			echo $output;
 		}
    }    
+   //Funcion para obtener los subgrupos en base a los grupos
+function get_porcentaje(){
+    $MATRICULA=$this->input->post('MATRICULA');
+    $TOTAL=$this->input->post('TOTAL');
+    if(!empty($MATRICULA) and !empty($TOTAL)){    
+        $sqlAPORTEVALIDA="select (SELECT TIPCAL_PORCENTAJE 
+                                    FROM TIPOCALIFICACION 
+                                    WHERE TIPCAL_SEC_MATRICULA=APO_SEC_MATRICULA) TIPOCALIFICACION
+                        from aportes WHERE APO_SEC_MATRICULA={$MATRICULA}";
+        $totRequerido=$this->db->query($sqlAPORTEVALIDA)->row()->TIPOCALIFICACION;
+        echo $totRequerido;
+    }else{        
+        echo "a";
+    }
+}
    
 }

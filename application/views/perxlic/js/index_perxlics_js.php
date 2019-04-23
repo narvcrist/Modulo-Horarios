@@ -31,10 +31,10 @@ jQuery(document).ready(function(){
 	//Botones que contendran cada evento o acción
     $("#itemperxlic").jqGrid('navGrid','#pitemperxlic',{del:false,add:false,edit:false,refresh:true, search: false},{},{},{},{multipleSearch:true,sopt:['cn','eq']});
     $("#itemperxlic").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : true});
-    $("#t_itemperxlic").append("<button title='Nueva perxlic' id='agr_perxlic'>Nueva</button>");
-    $("#t_itemperxlic").append("<button title='Editar perxlic' id='edit_perxlic'>Editar</button>");
-    $("#t_itemperxlic").append("<button title='Ver perxlic' id='ver_perxlic'>Ver</button>");
-    $("#t_itemperxlic").append("<button title='Eliminar perxlic' id='anular_perxlic'>Eliminar</button>");  
+    $("#t_itemperxlic").append("<button title='Nueva' id='agr_perxlic'>Nueva</button>");
+    $("#t_itemperxlic").append("<button title='Editar' id='edit_perxlic'>Editar</button>");
+    $("#t_itemperxlic").append("<button title='Ver' id='ver_perxlic'>Ver</button>");
+    $("#t_itemperxlic").append("<button title='Eliminar' id='anular_perxlic'>Eliminar</button>");  
     $("#t_itemperxlic").append("<button title='Recargar Listado' id='recargar_perxlic'>Refresh</button>");
     $("#t_itemperxlic").append("<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>"); 
     		
@@ -47,7 +47,7 @@ $("#agr_perxlic").jMostrarNoGrid({
             idButton:"#agr_perxlic",
             errorMens:"No se puede mostrar el formulario.",
             url: "perxlic/nuevaPerxlic/",
-            titulo: "Agregar una Perxlic",
+            titulo: "Agregar una Licencia para la Persona",
             alto:900,
             ancho: 1024,
             posicion: "top",
@@ -91,7 +91,7 @@ $("#edit_perxlic").jMostrarNoGrid({
             }
             });
 
-//Evento para ver la informacion de un persona			
+//Evento para ver la informacion de un persona para la licencia			
 $("#ver_perxlic").jMostrarNoGrid({
 	        id:"#itemperxlic",
 	        idButton:"#ver_perxlic",
@@ -115,7 +115,7 @@ $("#ver_perxlic").jMostrarNoGrid({
 	            };
 	        }
             });
-            //Actualiza la persona
+            //Actualiza la persona para la licencia
             $("#itemperxlic").jRecargar({
                 id:"#itemperxlic",
                 showText:true,
@@ -123,7 +123,7 @@ $("#ver_perxlic").jMostrarNoGrid({
                 icon:"ui-icon-refresh"
 			});            
 			
-			//Actualiza la persona
+			//Actualiza la persona para la licencia
             $("#itemperxlic").jRecargar({
                 id:"#itemperxlic",
                 showText:true,
@@ -131,7 +131,7 @@ $("#ver_perxlic").jMostrarNoGrid({
                 icon:"ui-icon-refresh"
 			});
 
-//Evento para eliminar una persona
+//Evento para eliminar una persona para la licencia
  $("#anular_perxlic").jMostrarNoGrid({
 	        id:"#itemperxlic",
 	        idButton:"#anular_perxlic",

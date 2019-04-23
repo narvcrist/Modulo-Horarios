@@ -74,7 +74,7 @@ class Mlicencia extends CI_Model {
 			$LIC_SECUENCIAL=$this->db->query("select max(LIC_SECUENCIAL) SECUENCIAL from LICENCIA")->row()->SECUENCIAL;
 			echo json_encode(array("cod"=>$LIC_SECUENCIAL,"numero"=>$LIC_SECUENCIAL,"mensaje"=>"Licencia: ".$LIC_SECUENCIAL.", insertado con éxito"));    
     }else {
-		echo json_encode(array("cod"=>1,"numero"=>1,"mensaje"=>"!!!...La Licencia Ya Se Encuentra ingresado...!!!"));
+		echo json_encode(array("cod"=>1,"numero"=>1,"mensaje"=>"!!!...La Licencia Ya Se Encuentra ingresada...!!!"));
 	}
  }
     

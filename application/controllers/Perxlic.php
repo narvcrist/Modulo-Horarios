@@ -17,7 +17,7 @@ class Perxlic extends CI_Controller{
             echo  $this->mperxlic->getdatosItems();
         }
         	
-	//funcion para cear una nueva persona
+	//funcion para cear una nueva persona para la licencia
 	public function nuevaPerxlic(){     
             $datos=$this->datos(null,'n');
             $datos['accion'] = 'n';
@@ -25,7 +25,7 @@ class Perxlic extends CI_Controller{
             $this->load->view("perxlic/perxlic_v",$datos);            
         }
         
-        //funcion para ver la informacion de una persona
+        //funcion para ver la informacion de una persona para la licencia
         function verPerxlic($accion=null){
             $numero = $this->input->post('NUMERO');
             if(!empty($numero)){
@@ -62,7 +62,7 @@ class Perxlic extends CI_Controller{
         return($datos);
      }
 	 
-	//Administra las fonciones de nuevo y editar en una persona
+	//Administra las fonciones de nuevo y editar en una persona para la licencia
     function admPerxlic($accion){
         switch($accion){
             case 'n':
@@ -74,7 +74,7 @@ class Perxlic extends CI_Controller{
         }        
     }
     
-	//Cambia de estado a pasivo a un persona	
+	//Cambia de estado a pasivo a un persona para la licencia	
     function anulartoda(){
          $PERXLIC_SECUENCIAL=$this->input->post('NUMERO');
             $SQL="update PERSONAXLICENCIA set PERXLIC_ESTADO=1 where PERXLIC_SECUENCIAL=$PERXLIC_SECUENCIAL"; 

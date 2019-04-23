@@ -110,6 +110,7 @@ class Maporte extends CI_Model {
 			$APO_FECHALIMITE="TO_DATE('".$FECHALIMITE."','DD/MM/YYYY HH24:MI:SS')";		
 			$APO_RESPONSABLE_CREA=$this->session->userdata('US_CODIGO');
 			$APO_RESPONSABLE_EDITA=$this->session->userdata('US_CODIGO');
+
 			$sqlAPORTEVALIDA="select count(*) NUM_APORTE from APORTES WHERE APO_SEC_PERSONA='{$APO_SEC_PERSONA}' 
 										and APO_SEC_MATRICULA='{$APO_SEC_MATRICULA}' 
 										and APO_ESTADO=0";
@@ -160,6 +161,25 @@ class Maporte extends CI_Model {
 			$APO_FECHALIMITE="TO_DATE('".$FECHALIMITE."','DD/MM/YYYY HH24:MI:SS')";
 			$APO_RESPONSABLE_EDITA=$this->session->userdata('US_CODIGO');				
 			
+			$sqlREPETICION1="select APO_SECUENCIAL,APO_SEC_MATRICULA 
+							from aportes
+							where APO_SECUENCIAL='{$APO_SECUENCIAL}'
+							and apo_estado=0";
+			$repe1 =$this->db->query($sqlREPETICION1)->row();
+			
+			$sqlREPETICION2="select APO_SECUENCIAL,APO_SEC_MATRICULA 
+							from aportes
+							where APO_SEC_MATRICULA='{$APO_SEC_MATRICULA}'
+							and apo_estado=0";
+			$repe2 =$this->db->query($sqlREPETICION2)->row();
+
+			$sqlREPETICION="select count(*) NUM_REPETICION
+							from aportes
+							where APO_SEC_MATRICULA='{$APO_SEC_MATRICULA}'
+							and apo_estado=0";
+			$NUM_REPETICION =$this->db->query($sqlREPETICION)->row()->NUM_REPETICION;
+			
+		if(($repe1->APO_SECUENCIAL==$repe2->APO_SECUENCIAL) or ($NUM_REPETICION==0)){
 			
 				$sql="UPDATE APORTES SET
 							APO_SEC_MATRICULA=$APO_SEC_MATRICULA,
@@ -173,7 +193,12 @@ class Maporte extends CI_Model {
                  WHERE APO_SECUENCIAL=$APO_SECUENCIAL";
          $this->db->query($sql);
 		 //print_r($sql);
+		 $APO_SECUENCIAL=$this->db->query("select max(APO_SECUENCIAL) SECUENCIAL from APORTES")->row()->SECUENCIAL;
 		 echo json_encode(array("cod"=>1,"numero"=>$APO_SECUENCIAL,"mensaje"=>"Aporte: ".$APO_SECUENCIAL.", editado con éxito"));
+	}else{     
+		echo json_encode(array("cod"=>1,"numero"=>1,"mensaje"=>"!!!...El aporte Ya Existe...!!!"));
 	}
+}
+
 }
 ?>

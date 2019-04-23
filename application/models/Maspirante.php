@@ -14,7 +14,7 @@ class Maspirante extends CI_Model {
 											"ASP_SECUENCIAL",
 											"ASP_FECHAINGRESO",
 											"ASP_NOMBRE",
-											"ASP_NUM_TIEMPODURACION",
+											"(ASP_NUM_TIEMPODURACION || ' dias') ASP_NUM_TIEMPODURACION",
 											"ASP_OBSERVACIONES",
 											"ASP_RESPONSABLE",
 											"ASP_ESTADO");
@@ -123,10 +123,6 @@ class Maspirante extends CI_Model {
 							ASP_NOMBRE='$ASP_NOMBRE',
 							ASP_NUM_TIEMPODURACION=$ASP_NUM_TIEMPODURACION,
 							ASP_OBSERVACIONES='$ASP_OBSERVACIONES'
-
-
-
-º
                 WHERE ASP_SECUENCIAL=$ASP_SECUENCIAL";
          $this->db->query($sql);
 		 //print_r($sql);

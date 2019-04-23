@@ -13,33 +13,33 @@ jQuery(document).ready(function(){
 					'Trabajo','Dir. Trabajo','# Trabajo','N. Conducción','Tipo Sangre','Responsable','Estado'],
           colModel:[
 					{name:'COLUMNAS',index:'COLUMNAS',align:"center",width:30,hidden:false},
-                    {name:'PER_SECUENCIAL',index:'PER_SECUENCIAL',align:"center",width:60},
-                    {name:'PER_SEC_JUNTA',index:'PER_SEC_JUNTA',align:"center", width:150},
+                    {name:'PER_SECUENCIAL',index:'PER_SECUENCIAL',align:"center",width:50},
+                    {name:'PER_SEC_JUNTA',index:'PER_SEC_JUNTA',align:"center", width:100},
 					{name:'PER_FECHAINGRESO',index:'PER_FECHAINGRESO',align:"center",  width:80},
-					{name:'PER_CEDULA',index:'PER_CEDULA',align:"center",  width:100},					
-					{name:'PER_NOMBRES',index:'PER_NOMBRES', width:100,align:"center"},
-					{name:'PER_APELLIDOS',index:'PER_APELLIDOS', width:100,align:"center"},
+					{name:'PER_CEDULA',index:'PER_CEDULA',align:"center",  width:80},					
+					{name:'PER_NOMBRES',index:'PER_NOMBRES', width:150,align:"center"},
+					{name:'PER_APELLIDOS',index:'PER_APELLIDOS', width:150,align:"center"},
 					{name:'PER_EMAIL',index:'PER_EMAIL', width:200,align:"center"},
-					{name:'PER_CONVENCIONAL',index:'PER_CONVENCIONAL', width:70,align:"center"},
-					{name:'PER_CELULAR',index:'PER_CELULAR', width:70,align:"center"},
-					{name:'PER_GENERO',index:'PER_GENERO', width:100,align:"center"},
-					{name:'PER_NOMBRE_REFERENCIA',index:'PER_NOMBRE_REFERENCIA', width:100,align:"center"},
+					{name:'PER_CONVENCIONAL',index:'PER_CONVENCIONAL', width:80,align:"center"},
+					{name:'PER_CELULAR',index:'PER_CELULAR', width:75,align:"center"},
+					{name:'PER_GENERO',index:'PER_GENERO', width:65,align:"center"},
+					{name:'PER_NOMBRE_REFERENCIA',index:'PER_NOMBRE_REFERENCIA', width:150,align:"center"},
 					{name:'PER_TELEFONO_REFERENCIA',index:'PER_TELEFONO_REFERENCIA', width:100,align:"center"},
-					{name:'PER_ESTADO_CIVIL',index:'PER_ESTADO_CIVIL', width:100,align:"center"},
+					{name:'PER_ESTADO_CIVIL',index:'PER_ESTADO_CIVIL', width:60,align:"center"},
 					{name:'PER_TITULO',index:'PER_TITULO', width:100,align:"center"},
 					{name:'PER_LUGAR_ESTUDIO',index:'PER_LUGAR_ESTUDIO', width:100,align:"center"},
-					{name:'PER_DIRECCION_ESTUDIO',index:'PER_DIRECCION_ESTUDIO', width:100,align:"center"},
+					{name:'PER_DIRECCION_ESTUDIO',index:'PER_DIRECCION_ESTUDIO', width:150,align:"justify"},
 					{name:'PER_LUGAR_RESIDENCIA',index:'PER_LUGAR_RESIDENCIA', width:100,align:"center"},
-					{name:'PER_DIRECCION_RESIDENCIA',index:'PER_DIRECCION_RESIDENCIA', width:100,align:"center"},
+					{name:'PER_DIRECCION_RESIDENCIA',index:'PER_DIRECCION_RESIDENCIA', width:150,align:"justify"},
 					{name:'PER_LUGAR_NACIMIENTO',index:'PER_LUGAR_NACIMIENTO', width:100,align:"center"},
-					{name:'PER_DIRECCION_NACIMIENTO',index:'PER_DIRECCION_NACIMIENTO', width:100,align:"center"},
+					{name:'PER_DIRECCION_NACIMIENTO',index:'PER_DIRECCION_NACIMIENTO', width:150,align:"justify"},
 					{name:'PER_LUGAR_TRABAJO',index:'PER_LUGAR_TRABAJO', width:100,align:"center"},
-					{name:'PER_DIRECCION_TRABAJO',index:'PER_DIRECCION_TRABAJO', width:100,align:"center"},
-					{name:'PER_TELEFONO_TRABAJO',index:'PER_TELEFONO_TRABAJO', width:100,align:"center"},
-					{name:'PER_NIVEL_CONDUCCION',index:'PER_NIVEL_CONDUCCION', width:100,align:"center"},
-					{name:'PER_TIPO_SANGRE',index:'PER_TIPO_SANGRE', width:100,align:"center"},
+					{name:'PER_DIRECCION_TRABAJO',index:'PER_DIRECCION_TRABAJO', width:150,align:"justify"},
+					{name:'PER_TELEFONO_TRABAJO',index:'PER_TELEFONO_TRABAJO', width:80,align:"center"},
+					{name:'PER_NIVEL_CONDUCCION',index:'PER_NIVEL_CONDUCCION',search:false, width:80,align:"center"},
+					{name:'PER_TIPO_SANGRE',index:'PER_TIPO_SANGRE', width:70,align:"center"},
 					{name:'PER_RESPONSABLE',index:'PER_RESPONSABLE', width:100,align:"center"},
-					{name:'PER_ESTADO',index:'PER_ESTADO',searchable:false, width:40,align:"center", edittype:'select', formatter:'select', editoptions:{value:"0:<span class='ui-icon ui-icon-circle-check ui-icon-extra'>Activo</span>;1:<span class='ui-icon ui-icon-circle-close ui-icon-extra'>Pasivo</span>"}}
+					{name:'PER_ESTADO',index:'PER_ESTADO',search:false, width:40,align:"center", edittype:'select', formatter:'select', editoptions:{value:"0:<span class='ui-icon ui-icon-circle-check ui-icon-extra'>Activo</span>;1:<span class='ui-icon ui-icon-circle-close ui-icon-extra'>Pasivo</span>"}}
                 ],
         rowNum:50,
         rowList : [50,100,200,800],
@@ -61,8 +61,8 @@ jQuery(document).ready(function(){
     $("#t_itemper").append("<button title='Editar Persona' id='edit_persona'>Editar</button>");
     $("#t_itemper").append("<button title='Ver Persona' id='ver_persona'>Ver</button>");
     $("#t_itemper").append("<button title='Eliminar Persona' id='anular_persona'>Eliminar</button>");  
-    $("#t_itemper").append("<button title='Recargar Listado' id='recargar_lista'>Refresh</button>");
-    $("#t_items").append("<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>"); 
+	$("#t_itemper").append("<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>"); 
+    $("#t_itemper").append("<button title='Recargar Listado' id='recargar_lista'>Refresh</button>");    
     		
         $("#itemper").setGridParam({datatype: "json",url:"persona/getdatosItems",postData:{numero:''}});
         $("#itemper").trigger('reloadGrid');

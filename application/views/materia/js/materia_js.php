@@ -20,7 +20,7 @@ jQuery(document).ready(function(){
     $("table.formDialog tr td.noClass").removeClass("ui-widget ui-widget-content");
     
    var accion='<?php echo $accion;?>';
-   var numero='<?php echo !empty($sol->PER_SECUENCIAL) ? prepCampoMostrar($sol->PER_SECUENCIAL) : null ; ?>';
+   var numero='<?php echo !empty($sol->MAT_SECUENCIAL) ? prepCampoMostrar($sol->MAT_SECUENCIAL) : null ; ?>';
    
    //Acciones que se manejan en base a los eventos
    if (accion=='n'){ //nueva
@@ -41,7 +41,31 @@ jQuery(document).ready(function(){
         }
     });
 	
-	//Funcion para validar correo		
+    //Fecha Actual
+var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1;
+		var yyyy = today.getFullYear();
+			if(dd<10){
+				dd='0'+dd
+			} 
+			if(mm<10){
+				mm='0'+mm
+			}
+		var today = dd+'-'+mm+'-'+yyyy; //variable fecha actual
+		
+ function rangoFecha(input){
+    return {
+        maxDate: today
+		}
+    }
+
+
+jQuery("#MAT_HORA_INICIO,#MAT_HORA_FIN").datepicker({
+        dateFormat: 'dd-mm-yy',
+  	beforeShow: rangoFecha
+    });
+	/*//Funcion para validar correo		
 	function validarEmail( email ) {
     expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     if ( !expr.test(email) ){
@@ -52,9 +76,10 @@ jQuery(document).ready(function(){
 		
 	$("#PER_EMAIL").change(function() {
         validarEmail($('#PER_EMAIL').val());        
-    })
-	
-	//FUNCIONES PARA LUGAR ESTUDIOS
+    })*/
+
+/*
+//FUNCIONES PARA LUGAR ESTUDIOS
 	//Funcion para combo de Pais en carga		 
 	$('#LOC_PAIS_ESTUDIOS').change(function() {
                     $("#LOC_PROVINCIA_ESTUDIOS").val("");
@@ -84,39 +109,12 @@ jQuery(document).ready(function(){
                $("#LOC_CIUDAD_ESTUDIOS").empty().html(data);
          },"html");                 
     }
-	
-	//FUNCIONES PARA LUGAR RESIDENCIA
-	//Funcion para combo de Pais en carga		 
-	$('#LOC_PAIS_RESIDENCIA').change(function() {
-                    $("#LOC_PROVINCIA_RESIDENCIA").val("");
-                    $("#LOC_CIUDAD_RESIDENCIA").val("");
-					datos_provincia_residencia($('#LOC_PAIS_RESIDENCIA').val());
-            });
-			
-	//Funcion para combo de Provincia en carga		
-	$('#LOC_PROVINCIA_RESIDENCIA').change(function() {
-				$("#LOC_CIUDAD_RESIDENCIA").val("");
-			    datos_ciudad_residencia($('#LOC_PROVINCIA_RESIDENCIA').val());
-            });			
-			
-		
-	//Funcion para tomar datos de provincia a partir del pais
-	function datos_provincia_residencia(pais){
-        $.post("varios/get_provincia",{pais:pais},
-            function(data){
-               $("#LOC_PROVINCIA_RESIDENCIA").empty().html(data);
-         },"html");                 
-    }
-	
-	//Funcion para tomar datos de ciudad a partir de provincia
-	function datos_ciudad_residencia(ciudad){
-        $.post("varios/get_ciudad",{ciudad:ciudad},
-            function(data){
-               $("#LOC_CIUDAD_RESIDENCIA").empty().html(data);
-         },"html");                 
-    }
-	
-	//FUNCIONES PARA LUGAR NACIMIENTO
+
+
+
+
+
+//FUNCIONES PARA LUGAR NACIMIENTO
 	//Funcion para combo de Pais en carga		 
 	$('#LOC_PAIS_NACIMIENTO').change(function() {
                     $("#LOC_PROVINCIA_NACIMIENTO").val("");
@@ -146,8 +144,10 @@ jQuery(document).ready(function(){
                $("#LOC_CIUDAD_NACIMIENTO").empty().html(data);
          },"html");                 
     }
-	
-	//FUNCIONES PARA LUGAR TRABAJO
+
+
+
+//FUNCIONES PARA LUGAR TRABAJO
 	//Funcion para combo de Pais en carga		 
 	$('#LOC_PAIS_TRABAJO').change(function() {
                     $("#LOC_PROVINCIA_TRABAJO").val("");
@@ -177,9 +177,10 @@ jQuery(document).ready(function(){
                $("#LOC_CIUDAD_TRABAJO").empty().html(data);
          },"html");                 
     }
+*/
 
 //Manejo de los campos tanto para un nuevo como para editar	
-$("#fpersona").validate({
+$("#fmateria").validate({
        errorClass: "ui-state-error",
        validClass: "ui-state-highlight",
        wrapper: "span class='ui-extra-validation ui-widget ui-container'",
@@ -187,13 +188,13 @@ $("#fpersona").validate({
        submitHandler: function(form){
            $.ajax({
                type: "POST",
-               url:  "persona/admPersona/"+accion,
-               data: $("#fpersona").serialize(),
+               url:  "materia/admMateria/"+accion,
+               data: $("#fmateria").serialize(),
                dataType:"json",
                success: function(r){
                        if (r.cod>0) {
-                           $("#fpersona").jConfirmacion({
-                                        titulo:"Persona: "+r.numero,
+                           $("#fmateria").jConfirmacion({
+                                        titulo:"Materia: "+r.numero,
                                         mensaje: r.mensaje,
                                         tipoMensaje:"highlight",
                                         ancho: 250,
@@ -201,7 +202,7 @@ $("#fpersona").validate({
                             });
                            $(":input","#cabecera").attr("disabled", true);
                            if (accion=='n'){
-                                $("#PER_SECUENCIAL").val(r.numero);
+                                $("#MAT_SECUENCIAL").val(r.numero);
 								}
                                 $("#co_grabar").hide();
                        } else {
@@ -211,13 +212,9 @@ $("#fpersona").validate({
            })// ajax
        },  //submit handler
        rules:{
-            genero:{required:true},
-            civil:{required:true},
-			"PER_CEDULA":{required:true},
-			"PER_NOMBRES":{required:true},
-			"PER_APELLIDOS":{required:true},
-			"PER_EMAIL":{required:true},			
-			"PER_NOMBRE_REFERENCIA":{required:true}
+            nivel:{required:true},
+            materia:{required:true},
+
              }
      });     
 });

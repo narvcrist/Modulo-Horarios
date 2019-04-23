@@ -10,21 +10,23 @@
 							Carrera
 						</th>
                         <td>
-                            <input type="text" maxlength="99" style="width:100px;" name="ASP_NOMBRE" id="ASP_NOMBRE" value="<?php echo !empty($sol->ASP_NOMBRE) ? prepCampoMostrar($sol->ASP_NOMBRE) : null ; ?>"  />
+                            <input type="text" maxlength="99" style="width:400px;" name="ASP_NOMBRE" id="ASP_NOMBRE" value="<?php echo !empty($sol->ASP_NOMBRE) ? prepCampoMostrar($sol->ASP_NOMBRE) : null ; ?>"  />
 						</td>
 
                         <th>
 							Tiempo de duración
 						</th>
                         <td>
-                            <input type="number" max="99" min="0" step="1" style="width:100px;" name="ASP_NUM_TIEMPODURACION" id="ASP_NUM_TIEMPODURACION" value="<?php echo !empty($sol->ASP_NUM_TIEMPODURACION) ? prepCampoMostrar($sol->ASP_NUM_TIEMPODURACION) : null ; ?>"  />
+                            <input type="number" max="99" min="0" step="1" style="width:75px;" name="ASP_NUM_TIEMPODURACION" id="ASP_NUM_TIEMPODURACION" value="<?php echo !empty($sol->ASP_NUM_TIEMPODURACION) ? prepCampoMostrar($sol->ASP_NUM_TIEMPODURACION) : null ; ?>"/> días
 						</td>
+                    </tr>
+                    <tr>    
 
 					   	<th>
 							Observaciones
                         </th>
-                        <td>
-						<input type="text" maxlength="499" style="width:100px;" name="ASP_OBSERVACIONES" id="ASP_OBSERVACIONES" value="<?php echo !empty($sol->ASP_OBSERVACIONES) ? prepCampoMostrar($sol->ASP_OBSERVACIONES) : null ; ?>"  />
+                        <td colspan="3">
+                            <TEXTAREA maxlength="499" style="width:500px;" rows="3" cols="40" id="ASP_OBSERVACIONES" name="ASP_OBSERVACIONES"> <?php echo (!empty($sol->ASP_OBSERVACIONES))?prepCampoMostrar($sol->ASP_OBSERVACIONES):null; ?>  </TEXTAREA> 
                         </td>
                     </tr>
               
