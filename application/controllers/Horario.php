@@ -48,18 +48,36 @@ class Horario extends CI_Controller{
 	//funcion para dar los valores a la cabecera tanto en nuevo, como al momento de editar
 	function datos($sol,$accion){
         if ($accion=='n') {
-            $datos['combo_persona']=$this->mvarios->cmb_persona(null," style='width:400px;' id='HOR_SEC_PERSONA'");
-            $datos['combo_matricula']=$this->mvarios->cmb_matricula(null,"style='width:500px;' id='HOR_SEC_MATRICULA'");
+            $datos['combo_persona']=$this->mvarios->cmb_persona(null," style='width:800px;' id='HOR_SEC_PERSONA'");
+            $datos['combo_matricula']=$this->mvarios->cmb_matricula(null,"style='width:800px;' id='HOR_SEC_MATRICULA'");
+			$datos['combo_dia']=$this->cmb_dia(null," style='width:100px;' id='HOR_DIA'");
             //$datos=null;
 		} else {
             $HOR_SEC_PERSONA=$sol->HOR_SEC_PERSONA;
-            $datos['combo_persona']=$this->mvarios->cmb_persona($HOR_SEC_PERSONA," style='width:400px;' id='HOR_SEC_PERSONA'");  
+            $datos['combo_persona']=$this->mvarios->cmb_persona($HOR_SEC_PERSONA," style='width:800px;' id='HOR_SEC_PERSONA'");  
             $HOR_SEC_MATRICULA=$sol->HOR_SEC_MATRICULA;
-            $datos['combo_matricula']=$this->mvarios->cmb_matricula($HOR_SEC_MATRICULA,"style='width:500px;' id='HOR_SEC_MATRICULA'");
-            //$datos=null;
+            $datos['combo_matricula']=$this->mvarios->cmb_matricula($HOR_SEC_MATRICULA,"style='width:800px;' id='HOR_SEC_MATRICULA'");
+            $dia=$sol->HOR_DIA;
+			$datos['combo_dia']=$this->cmb_dia($dia,$sol->HOR_DIA," style='width:100px;' id='HOR_DIA'");
+			//$datos=null;
         }
         return($datos);
      }
+	 
+	 //Combo para dias de la semana 
+    function  cmb_dia($tipo = null, $attr = null) {
+        $output = array();
+        $output[null] = "Día....";
+        $output['Lu'] = "Lunes";
+        $output['Ma'] = "Martes";
+        $output['Mi'] = "Miércoles";
+        $output['Ju'] = "Jueves";
+        $output['Vi'] = "Viernes";
+        $output['Sa'] = "Sábado";
+        $output['Do'] = "Domingo";
+        
+        return form_dropdown('dia', $output, $tipo, $attr);
+    }	
 	 
 	//Administra las fonciones de nuevo y editar en una persona
     function admHorario($accion){

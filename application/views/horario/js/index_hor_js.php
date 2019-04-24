@@ -12,8 +12,8 @@ jQuery(document).ready(function(){
           colModel:[
 					{name:'COLUMNAS',index:'COLUMNAS',align:"center",width:30,hidden:false},
                     {name:'HOR_SECUENCIAL',index:'HOR_SECUENCIAL',align:"center",width:60},
-                    {name:'HOR_SEC_PERSONA',index:'HOR_SEC_PERSONA',align:"center", width:180},
-                    {name:'HOR_SEC_MATRICULA',index:'HOR_SEC_MATRICULA',align:"center", search:false, width:350},
+                    {name:'HOR_SEC_PERSONA',index:'HOR_SEC_PERSONA',align:"center", width:250},
+                    {name:'HOR_SEC_MATRICULA',index:'HOR_SEC_MATRICULA',align:"center", search:false, width:300},
 					{name:'HOR_FECHAINGRESO',index:'HOR_FECHAINGRESO',align:"center",  width:80},
 					{name:'HOR_HORA_INICIO',index:'HOR_HORA_INICIO',align:"center",  width:150},
                     {name:'HOR_HORA_FIN',index:'HOR_HORA_FIN',align:"center",  width:150},					

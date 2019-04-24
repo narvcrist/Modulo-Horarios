@@ -29,7 +29,15 @@ class Mhorario extends CI_Model {
 											"HOR_FECHAINGRESO",
 											"to_char(HOR_HORA_INICIO,'DD-MM-YYY HH24:MI:SS') HOR_HORA_INICIO",
                                             "to_char(HOR_HORA_FIN,'DD-MM-YYY HH24:MI:SS') HOR_HORA_FIN",
-											"HOR_DIA",
+											"(CASE HOR_DIA
+											WHEN 'Lu' THEN 'Lunes'
+											WHEN 'Ma' THEN 'Martes'
+											WHEN 'Mi' THEN 'Miercoles'
+											WHEN 'Ju' THEN 'Jueves'
+											WHEN 'Vi' THEN 'Viernes'
+											WHEN 'Sa' THEN 'Sabado'
+											WHEN 'Do' THEN 'Domingo'
+											END) HOR_DIA",
 											"HOR_RESPONSABLE",
 											"HOR_ESTADO");
 			  $datos->campos = array( "ROWNUM",
@@ -95,7 +103,7 @@ class Mhorario extends CI_Model {
             $HOR_SEC_MATRICULA=prepCampoAlmacenar($this->input->post('matricula'));
             $HORA_INICIO=prepCampoAlmacenar($this->input->post('HOR_HORA_INICIO')); 
             $HORA_FIN=prepCampoAlmacenar($this->input->post('HOR_HORA_FIN'));
-            $HOR_DIA=prepCampoAlmacenar($this->input->post('HOR_DIA'));	
+            $HOR_DIA=prepCampoAlmacenar($this->input->post('dia'));	
         
 			$sqlHORARIOVALIDA="select count(*) NUM_HORARIO from HORARIO WHERE HOR_SEC_PERSONA='{$HOR_SEC_PERSONA }' and HOR_ESTADO=0";
 			$NUM_HORARIO =$this->db->query($sqlHORARIOVALIDA)->row()->NUM_HORARIO ;
@@ -138,7 +146,7 @@ class Mhorario extends CI_Model {
             $HOR_HORA_INICIO="TO_DATE('".$HORA_INICIO."','DD/MM/YYYY HH24:MI:SS')";
             $HORA_FIN=prepCampoAlmacenar($this->input->post('HOR_HORA_FIN'));	
             $HOR_HORA_FIN="TO_DATE('".$HORA_FIN."','DD/MM/YYYY HH24:MI:SS')";			
-            $HOR_DIA=prepCampoAlmacenar($this->input->post('HOR_DIA'));		
+            $HOR_DIA=prepCampoAlmacenar($this->input->post('dia'));		
             
 
             $sqlREPETICION1="select HOR_SECUENCIAL,HOR_SEC_MATRICULA 
